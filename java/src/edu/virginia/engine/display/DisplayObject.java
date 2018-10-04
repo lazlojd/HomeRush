@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Point;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -23,12 +24,18 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+
 	/* Lab 1 part 2*/
 	public Boolean visible;
 	public Float alpha;
 	public Float oldAlpha;
 	public double scaleX;
 	public double scaleY;
+	private Point position;
+
+	private Point pivotPoint;
+
+	private float rotation;
 
 	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
 	private void init2() {
@@ -38,6 +45,9 @@ public class DisplayObject {
 		this.scaleX = 1.0;
 		this.scaleY = 1.0;
 	}
+	
+
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
@@ -54,12 +64,84 @@ public class DisplayObject {
 		init2();
 	}
 
+	private void init() {
+	    this.position = new Point(0,0);
+	    this.pivotPoint = new Point(0,0);
+	    this.rotation = 0.0;
+
+
+	}
+	
+	public Boolean getVisible() {
+		return this.visible;
+	}
+
+	public Float getAlpha() {
+		return alpha;
+	}
+
+	public Float getOldAlpha() {
+		return oldAlpha;
+	}
+
+	public double getScaleX() {
+		return scaleX;
+	}
+
+	public double getScaleY() {
+		return scaleY;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setAlpha(Float alpha) {
+		this.alpha = alpha;
+	}
+
+	public void setOldAlpha(Float oldAlpha) {
+		this.oldAlpha = oldAlpha;
+	}
+
+	public void setScaleX(double scaleX) {
+		this.scaleX = scaleX;
+	}
+
+	public void setScaleY(double scaleY) {
+		this.scaleY = scaleY;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	public String getId() {
-		return id;
+	    return id;
+	}
+
+	public Point getPosition() {
+	    return position;
+	}
+
+	public Point getPivotPoint() {
+	    return pivotPoint;
+	}
+
+	public float getRotation() {
+	    return rotation;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+
+	public void setPivotPoint(Point pivotPoint) {
+		this.pivotPoint = pivotPoint;
+	}
+
+	public float setRotation(float rotation) {
+		this.rotation = rotation;
 	}
 
 
@@ -112,45 +194,7 @@ public class DisplayObject {
 		displayImage = image;
 	}
 
-	public Boolean getVisible() {
-		return this.visible;
-	}
-
-	public Float getAlpha() {
-		return alpha;
-	}
-
-	public Float getOldAlpha() {
-		return oldAlpha;
-	}
-
-	public double getScaleX() {
-		return scaleX;
-	}
-
-	public double getScaleY() {
-		return scaleY;
-	}
-
-	public void setVisible(Boolean visible) {
-		this.visible = visible;
-	}
-
-	public void setAlpha(Float alpha) {
-		this.alpha = alpha;
-	}
-
-	public void setOldAlpha(Float oldAlpha) {
-		this.oldAlpha = oldAlpha;
-	}
-
-	public void setScaleX(double scaleX) {
-		this.scaleX = scaleX;
-	}
-
-	public void setScaleY(double scaleY) {
-		this.scaleY = scaleY;
-	}
+	
 
 	/**
 	 * Invoked on every frame before drawing. Used to update this display
@@ -203,15 +247,16 @@ public class DisplayObject {
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
-	
+
 	}
 
 	/**
 	 * Reverses transformations for this display object to the given graphics
 	 * object
 	 * */
-	protected void reverseTransformations(Graphics2D g2d) {
-		
+	protected void reverseTransformations(Graphics2D g2d){
+            g2d.setComposite(AlphaComposite.getInstance(3,
+                    this.oldAlpha))
 
 	}
 
