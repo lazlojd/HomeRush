@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.awt.Point;
 import javax.imageio.ImageIO;
 
 /**
@@ -23,17 +23,35 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	/* Lab 1 part 2*/
+	public Boolean visible;
+	public Float alpha;
+	public Float oldAlpha;
+	public double scaleX;
+	public double scaleY;
+
+	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
+	private void init() {
+		this.visible = Boolean.TRUE;
+		this.alpha = 1.0;
+		this.oldAlpha = 0.0;
+		this.scaleX = 1.0;
+		this.scaleY = 1.0;
+	}
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
 	 */
 	public DisplayObject(String id) {
+
 		this.setId(id);
+		init();
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		init();
 	}
 
 	public void setId(String id) {
@@ -94,6 +112,45 @@ public class DisplayObject {
 		displayImage = image;
 	}
 
+	public Boolean getVisible() {
+		return this.visible;
+	}
+
+	public Float getAlpha() {
+		return alpha;
+	}
+
+	public Float getOldAlpha() {
+		return oldAlpha;
+	}
+
+	public double getScaleX() {
+		return scaleX;
+	}
+
+	public double getScaleY() {
+		return scaleY;
+	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+	}
+
+	public void setAlpha(Float alpha) {
+		this.alpha = alpha;
+	}
+
+	public void setOldAlpha(Float oldAlpha) {
+		this.oldAlpha = oldAlpha;
+	}
+
+	public void setScaleX(double scaleX) {
+		this.scaleX = scaleX;
+	}
+
+	public void setScaleY(double scaleY) {
+		this.scaleY = scaleY;
+	}
 
 	/**
 	 * Invoked on every frame before drawing. Used to update this display

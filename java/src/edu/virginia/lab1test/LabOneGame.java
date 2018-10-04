@@ -14,6 +14,7 @@ public class LabOneGame extends Game{
 
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
+
 	
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -33,11 +34,13 @@ public class LabOneGame extends Game{
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) mario.update(pressedKeys);
 
-		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-		}
+//		if(pressedKeys.contains(KeyEvent.VK_UP)) {
+//			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
+//		}
 		
 	}
+
+
 	
 	/**
 	 * Engine automatically invokes draw() every frame as well. If we want to make sure mario gets drawn to
