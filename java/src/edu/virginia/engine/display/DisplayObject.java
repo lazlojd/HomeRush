@@ -29,8 +29,8 @@ public class DisplayObject {
 	public Boolean visible;
 	public Float alpha;
 	public Float oldAlpha;
-	public double scaleX;
-	public double scaleY;
+	public Float scaleX;
+	public Float scaleY;
 	private Point position;
 
 	private Point pivotPoint;
@@ -40,10 +40,10 @@ public class DisplayObject {
 	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
 	private void init2() {
 		this.visible = Boolean.TRUE;
-		this.alpha = 1.0;
-		this.oldAlpha = 0.0;
-		this.scaleX = 1.0;
-		this.scaleY = 1.0;
+		this.alpha = 1.0f;
+		this.oldAlpha = 0.0f;
+		this.scaleX = 1.0f;
+		this.scaleY = 1.0f;
 	}
 	
 
@@ -67,7 +67,7 @@ public class DisplayObject {
 	private void init() {
 	    this.position = new Point(0,0);
 	    this.pivotPoint = new Point(0,0);
-	    this.rotation = 0.0;
+	    this.rotation = 0.0f;
 
 
 	}
@@ -84,11 +84,11 @@ public class DisplayObject {
 		return oldAlpha;
 	}
 
-	public double getScaleX() {
+	public Float getScaleX() {
 		return scaleX;
 	}
 
-	public double getScaleY() {
+	public Float getScaleY() {
 		return scaleY;
 	}
 
@@ -104,11 +104,11 @@ public class DisplayObject {
 		this.oldAlpha = oldAlpha;
 	}
 
-	public void setScaleX(double scaleX) {
+	public void setScaleX(Float scaleX) {
 		this.scaleX = scaleX;
 	}
 
-	public void setScaleY(double scaleY) {
+	public void setScaleY(Float scaleY) {
 		this.scaleY = scaleY;
 	}
 
@@ -256,7 +256,7 @@ public class DisplayObject {
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
             g2d.setComposite(AlphaComposite.getInstance(3,
-                    this.oldAlpha))
+                    this.oldAlpha));
 
 	}
 

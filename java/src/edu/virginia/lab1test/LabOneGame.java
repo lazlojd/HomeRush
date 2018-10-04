@@ -36,22 +36,7 @@ public class LabOneGame extends Game{
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
 		if(mario != null) mario.update(pressedKeys);
 
-<<<<<<< HEAD
-=======
 
-		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-		}
-
-//		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-//			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-//		}
-//
-//		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-//			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-//		}
-//
->>>>>>> 6ac1b8bb9ccb6d703de60297ca2679b9669804af
 //		if(pressedKeys.contains(KeyEvent.VK_UP)) {
 //			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
 //		}
