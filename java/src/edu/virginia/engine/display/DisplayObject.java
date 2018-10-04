@@ -1,12 +1,10 @@
 package edu.virginia.engine.display;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.Point;
 
 import javax.imageio.ImageIO;
 
@@ -140,7 +138,7 @@ public class DisplayObject {
 		this.pivotPoint = pivotPoint;
 	}
 
-	public float setRotation(float rotation) {
+	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
 
