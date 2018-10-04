@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Point;
 
 import javax.imageio.ImageIO;
 
@@ -23,6 +24,12 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	private Point position;
+
+	private Point pivotPoint;
+
+	private float rotation;
+
 	/**
 	 * Constructors: can pass in the id OR the id and image's file path and
 	 * position OR the id and a buffered image and position
@@ -36,12 +43,45 @@ public class DisplayObject {
 		this.setImage(fileName);
 	}
 
+	private void init() {
+	    this.position = new Point(0,0);
+	    this.pivotPoint = new Point(0,0);
+	    this.rotation = 0.0;
+
+
+	}
+}
+
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	public String getId() {
-		return id;
+	    return id;
+	}
+
+	public Point getPosition() {
+	    return position;
+	}
+
+	public Point getPivotPoint() {
+	    return pivotPoint;
+	}
+
+	public float getRotation() {
+	    return rotation;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
+
+	public void setPivotPoint(Point pivotPoint) {
+		this.pivotPoint = pivotPoint;
+	}
+
+	public float setRotation(float rotation) {
+		this.rotation = rotation;
 	}
 
 
@@ -146,15 +186,16 @@ public class DisplayObject {
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
-	
+
 	}
 
 	/**
 	 * Reverses transformations for this display object to the given graphics
 	 * object
 	 * */
-	protected void reverseTransformations(Graphics2D g2d) {
-		
+	protected void reverseTransformations(Graphics2D g2d){
+            g2d.setComposite(AlphaComposite.getInstance(3,
+                    this.oldAlpha))
 
 	}
 
