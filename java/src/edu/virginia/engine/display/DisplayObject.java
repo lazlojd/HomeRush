@@ -53,12 +53,14 @@ public class DisplayObject {
 	public DisplayObject(String id) {
 
 		this.setId(id);
+		init();
 		init2();
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
+		init();
 		init2();
 	}
 
