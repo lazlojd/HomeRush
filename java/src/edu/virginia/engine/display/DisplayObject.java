@@ -31,7 +31,7 @@ public class DisplayObject {
 	public double scaleY;
 
 	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
-	private void init() {
+	private void init2() {
 		this.visible = Boolean.TRUE;
 		this.alpha = 1.0;
 		this.oldAlpha = 0.0;
@@ -45,13 +45,13 @@ public class DisplayObject {
 	public DisplayObject(String id) {
 
 		this.setId(id);
-		init();
+		init2();
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
-		init();
+		init2();
 	}
 
 	public void setId(String id) {
