@@ -16,7 +16,8 @@ public class LabOneGame extends Game{
 
 	/* Create a sprite object for our game. We'll use mario */
 	Sprite mario = new Sprite("Mario", "Mario.png");
-
+	// See VK_V event block for usage details of visibilityBlocker
+	private int visibilityBlocker = 10;
 	
 	/**
 	 * Constructor. See constructor in Game.java for details on the parameters given
@@ -32,14 +33,62 @@ public class LabOneGame extends Game{
 	@Override
 	public void update(ArrayList<Integer> pressedKeys){
 		super.update(pressedKeys);
-		
+
+		visibilityBlocker--;
+		if (visibilityBlocker == Integer.MAX_VALUE)
+			visibilityBlocker = 10;
+
 		/* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-		if(mario != null) mario.update(pressedKeys);
+		if (mario != null) mario.update(pressedKeys);
 
 
-//		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-//			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-//		}
+		if (pressedKeys.contains(KeyEvent.VK_UP)) {
+			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_V)) {
+			/* visibilityBlocker only allows visbility to change once every 10 iterations of the loop
+			 * This prevents V key events that last more than one iteration from producing
+			 * no effect on the sprite
+			 */
+			if (visibilityBlocker <= 0) {
+				mario.setVisible(!mario.getVisible());
+				visibilityBlocker = 10;
+			}
+			System.out.println(mario.getVisible());
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_Z)) {
+			Float alpha = mario.getAlpha();
+			if (alpha + 0.01f <= 1) {
+				mario.setAlpha(mario.getAlpha() + 0.01f);
+			}
+
+			System.out.println(mario.getAlpha());
+			System.out.println("-------------");
+
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_X)) {
+			Float alpha = mario.getAlpha();
+			if (alpha - 0.01f >= 0) {
+				mario.setAlpha(mario.getAlpha() - 0.01f);
+			}
+			System.out.println(mario.getAlpha());
+			System.out.println("-------------");
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_A)) {
+			mario.setScaleX(mario.getScaleX() + 0.1);
+			mario.setScaleY(mario.getScaleY() + 0.1);
+
+		}
+
+		if (pressedKeys.contains(KeyEvent.VK_S)) {
+			mario.setScaleX(mario.getScaleX() - 0.1);
+			mario.setScaleY(mario.getScaleY() -  0.1);
+		}
+
 		
 	}
 

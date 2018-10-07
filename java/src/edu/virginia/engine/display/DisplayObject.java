@@ -27,21 +27,24 @@ public class DisplayObject {
 	public Boolean visible;
 	public Float alpha;
 	public Float oldAlpha;
-	public Float scaleX;
-	public Float scaleY;
+	public Double scaleX;
+	public Double scaleY;
 	private Point position;
 
 	private Point pivotPoint;
 
 	private float rotation;
 
+	private int visibleHelper;
+
 	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
 	private void init2() {
-		this.visible = Boolean.TRUE;
+		this.visible = true;
 		this.alpha = 1.0f;
 		this.oldAlpha = 0.0f;
-		this.scaleX = 1.0f;
-		this.scaleY = 1.0f;
+		this.scaleX = 1.0;
+		this.scaleY = 1.0;
+		this.visibleHelper = 1;
 	}
 	
 
@@ -84,16 +87,21 @@ public class DisplayObject {
 		return oldAlpha;
 	}
 
-	public Float getScaleX() {
+	public Double getScaleX() {
 		return scaleX;
 	}
 
-	public Float getScaleY() {
+	public Double getScaleY() {
 		return scaleY;
 	}
 
 	public void setVisible(Boolean visible) {
 		this.visible = visible;
+		if (visible) {
+		    this.setAlpha(1.0f);
+        } else {
+		    this.setAlpha(0.0f);
+        }
 	}
 
 	public void setAlpha(Float alpha) {
@@ -104,11 +112,11 @@ public class DisplayObject {
 		this.oldAlpha = oldAlpha;
 	}
 
-	public void setScaleX(Float scaleX) {
+	public void setScaleX(Double scaleX) {
 		this.scaleX = scaleX;
 	}
 
-	public void setScaleY(Float scaleY) {
+	public void setScaleY(Double scaleY) {
 		this.scaleY = scaleY;
 	}
 
