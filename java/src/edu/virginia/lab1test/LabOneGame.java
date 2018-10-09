@@ -89,9 +89,10 @@ public class LabOneGame extends Game{
 			mario.setScaleY(mario.getScaleY() -  0.1);
 		}
 
-		if(pressedKeys.contains(KeyEvent.VK_UP)) {
-			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-		}
+        /* Up, down, left, right */
+        if(pressedKeys.contains(KeyEvent.VK_UP)) {
+            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
+        }
         if(pressedKeys.contains(KeyEvent.VK_DOWN)) {
             mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
         }
@@ -101,8 +102,30 @@ public class LabOneGame extends Game{
         if(pressedKeys.contains(KeyEvent.VK_RIGHT)) {
             mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
         }
-        
-	}
+        /* I,J,K,L Pivot Point */
+        if(pressedKeys.contains(KeyEvent.VK_I)) {
+            mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
+        }
+        if(pressedKeys.contains(KeyEvent.VK_J)) {
+            mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y + 5));
+        }
+        if(pressedKeys.contains(KeyEvent.VK_K)) {
+            mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
+        }
+        if(pressedKeys.contains(KeyEvent.VK_L)) {
+            mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
+        }
+
+        /* W and Q Rotation */
+        if(pressedKeys.contains(KeyEvent.VK_W)) {
+            mario.setRotation(mario.getRotation() + 5.0f);
+        }
+        if(pressedKeys.contains(KeyEvent.VK_Q)) {
+            mario.setRotation(mario.getRotation() - 5.0f);
+        }
+
+
+    }
 
 
 	
