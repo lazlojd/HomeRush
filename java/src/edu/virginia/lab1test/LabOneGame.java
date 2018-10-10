@@ -101,7 +101,7 @@ public class LabOneGame extends Game{
         if(pressedKeys.contains(KeyEvent.VK_RIGHT)) {
             mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
         }
-        
+
 	}
 
 
