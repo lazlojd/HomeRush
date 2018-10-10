@@ -95,9 +95,17 @@ public class DisplayObject {
 	public void setVisible(Boolean visible) {
 		this.visible = visible;
 		if (visible) {
-		    this.setAlpha(1.0f);
+			if (this.getOldAlpha() > 0)
+				this.setAlpha(this.getOldAlpha());
+			else
+		    	this.setAlpha(1.0f);
         } else {
-		    this.setAlpha(0.0f);
+			if (alpha > 0) {
+				this.setOldAlpha(this.getAlpha());
+				this.setAlpha(0.0f);
+			} else { //if sprite is invisible (transparency set to 0 with X) make it visible
+				this.setVisible(true);
+			}
         }
 	}
 
