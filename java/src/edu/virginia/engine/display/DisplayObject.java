@@ -22,6 +22,11 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
+	/* Lab 1 part 1 */
+	private Point position;
+	private Point pivotPoint;
+	private float rotation;
+	private boolean isPivoted;
 
 	/* Lab 1 part 2*/
 	public Boolean visible;
@@ -29,11 +34,6 @@ public class DisplayObject {
 	public Float oldAlpha;
 	public Double scaleX;
 	public Double scaleY;
-	private Point position;
-
-	private Point pivotPoint;
-
-	private float rotation;
 
 	private int visibleHelper;
 
@@ -71,6 +71,7 @@ public class DisplayObject {
 	    this.position = new Point(0,0);
 	    this.pivotPoint = new Point(0,0);
 	    this.rotation = 0.0f;
+	    this.isPivoted = false;
 
 
 	}
@@ -133,6 +134,7 @@ public class DisplayObject {
 	}
 
 	public Point getPivotPoint() {
+	    isPivoted = true;
 	    return pivotPoint;
 	}
 
@@ -247,8 +249,8 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
-		g2d.translate(this.position.x, this.position.y);
-		g2d.rotate(Math.toRadians(this.getRotation()));
+	    g2d.translate(this.position.x, this.position.y);
+	    g2d.rotate(Math.toRadians(this.getRotation()), this.getPivotPoint().x, this.getPivotPoint().y);
 		g2d.scale(this.scaleX, this.scaleY);
 		float curAlpha;
 		this.oldAlpha = curAlpha = ((AlphaComposite)

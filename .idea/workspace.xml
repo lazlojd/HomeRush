@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c03fc95d-edef-4a68-bb52-a0059901ab60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab1test/LabOneGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab1test/LabOneGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/DisplayObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/DisplayObject.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,23 +25,23 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="class" value="3" />
-          <entry key="java" value="2" />
+          <entry key="java" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CLASS" value="3" />
-          <entry key="JAVA" value="2" />
+          <entry key="JAVA" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="14" />
+          <entry key="java" value="295" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="14" />
+          <entry key="JAVA" value="295" />
         </counts>
       </usages-collector>
     </session>
@@ -50,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1717">
-              <caret line="134" column="9" lean-forward="true" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
+            <state relative-caret-position="-662">
+              <caret line="42" selection-start-line="42" selection-end-line="42" />
             </state>
           </provider>
         </entry>
@@ -59,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="246" column="13" lean-forward="true" selection-start-line="246" selection-start-column="13" selection-end-line="246" selection-end-column="13" />
+            <state relative-caret-position="202">
+              <caret line="249" column="13" lean-forward="true" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -70,6 +71,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>readImage</find>
+      <find>drawImage</find>
+      <find>visible</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -79,6 +82,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java" />
+        <option value="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" />
       </list>
     </option>
   </component>
@@ -110,6 +114,42 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="display" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
+              <item name="lab1test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -119,7 +159,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539114065773" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539138525513" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -181,9 +221,9 @@
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
+      <window_info anchor="bottom" id="Messages" weight="0.3299363" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -203,13 +243,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="134" column="9" lean-forward="true" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/java/out/production/lab1/edu/virginia/lab1test/LabOneGame.class">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -237,10 +270,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/GameScenePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1551">
+          <caret line="149" column="45" selection-start-line="149" selection-start-column="45" selection-end-line="149" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-662">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="246" column="13" lean-forward="true" selection-start-line="246" selection-start-column="13" selection-end-line="246" selection-end-column="13" />
+        <state relative-caret-position="202">
+          <caret line="249" column="13" lean-forward="true" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
         </state>
       </provider>
     </entry>

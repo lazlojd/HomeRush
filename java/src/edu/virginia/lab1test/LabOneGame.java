@@ -42,10 +42,6 @@ public class LabOneGame extends Game{
 		if (mario != null) mario.update(pressedKeys);
 
 
-		if (pressedKeys.contains(KeyEvent.VK_UP)) {
-			mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-		}
-
 		if (pressedKeys.contains(KeyEvent.VK_V)) {
 			/* visibilityBlocker only allows visbility to change once every 10 iterations of the loop
 			 * This prevents V key events that last more than one iteration from producing
