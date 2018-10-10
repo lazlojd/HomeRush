@@ -26,7 +26,6 @@ public class DisplayObject {
 	private Point position;
 	private Point pivotPoint;
 	private float rotation;
-	private boolean isPivoted;
 
 	/* Lab 1 part 2*/
 	public Boolean visible;
@@ -71,9 +70,6 @@ public class DisplayObject {
 	    this.position = new Point(0,0);
 	    this.pivotPoint = new Point(0,0);
 	    this.rotation = 0.0f;
-	    this.isPivoted = false;
-
-
 	}
 	
 	public Boolean getVisible() {
@@ -133,10 +129,7 @@ public class DisplayObject {
 	    return position;
 	}
 
-	public Point getPivotPoint() {
-	    isPivoted = true;
-	    return pivotPoint;
-	}
+	public Point getPivotPoint() { return pivotPoint; }
 
 	public float getRotation() {
 	    return rotation;

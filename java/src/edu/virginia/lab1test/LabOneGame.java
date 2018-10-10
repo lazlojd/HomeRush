@@ -81,8 +81,11 @@ public class LabOneGame extends Game{
 		}
 
 		if (pressedKeys.contains(KeyEvent.VK_S)) {
-			mario.setScaleX(mario.getScaleX() - 0.1);
-			mario.setScaleY(mario.getScaleY() -  0.1);
+			if (mario.getScaleX() - 0.1 >= 0 || mario.getScaleY() - 0.1 >= 0) {
+				mario.setScaleX(mario.getScaleX() - 0.1);
+				mario.setScaleY(mario.getScaleY() -  0.1);
+			}
+
 		}
 
         /* Up, down, left, right */
