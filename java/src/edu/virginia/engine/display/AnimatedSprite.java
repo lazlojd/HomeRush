@@ -52,6 +52,7 @@ public class AnimatedSprite extends Sprite {
 
     }
 
+    /* Krishan */
     public void loadFrames() { /* AKA initializeFrames */
         ArrayList paths = new ArrayList;
         paths.add("mario_jump_0.png");
@@ -64,6 +65,7 @@ public class AnimatedSprite extends Sprite {
         }
     }
 
+    /* Krishan */
     public Animation getAnimation(String id) {
         for(int i = 0; i < this.animations.size(); i++) {
             if(this.animations.get(i).getId() == id) {
