@@ -4,19 +4,20 @@ import edu.virginia.engine.util.GameClock;
 
 import java.util.ArrayList;
 import java.awt.*;
+import java.lang.Thread;
 
 public class AnimatedSprite extends Sprite {
 
-    static final int DEFAULT_ANIMATION_SPEED = 1;
+    static final int DEFAULT_ANIMATION_SPEED = 1000;
 
-    private ArrayList<AnimatedSprite> animations;
+    private ArrayList<Animation> animations;
     private Boolean playing;
     private String fileName;
     private ArrayList<DisplayObject> frames;
     private Integer currentFrame;
     private Integer startFrame;
     private Integer endFrame;
-    private Float animationSpeed;
+    private Integer animationSpeed;
     private GameClock gameClock;
 
 
@@ -34,16 +35,21 @@ public class AnimatedSprite extends Sprite {
             this.gameClock = new GameClock();
     }
 
-    public void setAnimations(ArrayList<AnimatedSprite> animations) {
+    public void setAnimations(ArrayList<Animation> animations) {
         this.animations = animations;
     }
 
-    public void setAnimationSpeed(Float animationSpeed) {
+    public void setAnimationSpeed(Integer animationSpeed) {
         this.animationSpeed = animationSpeed;
     }
 
     public void draw() {
-        
+        currentFrame = startFrame;
+        while (currentFrame != endFrame) {
+
+        }
+
+
     }
 
 
