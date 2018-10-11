@@ -19,6 +19,8 @@ public class AnimatedSprite extends Sprite {
     private Float animationSpeed;
     private GameClock gameClock;
 
+
+
     public AnimatedSprite(String id, String fileName, Point pos) {
         super(id);
         this.fileName = fileName;
@@ -26,9 +28,22 @@ public class AnimatedSprite extends Sprite {
         this.gameClock = new GameClock();
     }
 
+
     public void initGameClock() {
         if (gameClock == null)
             this.gameClock = new GameClock();
+    }
+
+    public void setAnimations(ArrayList<AnimatedSprite> animations) {
+        this.animations = animations;
+    }
+
+    public void setAnimationSpeed(Float animationSpeed) {
+        this.animationSpeed = animationSpeed;
+    }
+
+    public void draw() {
+        
     }
 
 
