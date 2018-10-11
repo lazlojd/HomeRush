@@ -52,6 +52,27 @@ public class AnimatedSprite extends Sprite {
 
     }
 
+    public void loadFrames() { /* AKA initializeFrames */
+        ArrayList paths = new ArrayList;
+        paths.add("mario_jump_0.png");
+        paths.add("mario_jump_1.png");
+        paths.add("mario_run_0.png");
+        paths.add("mario_run_1.png");
+        for(int i = 0; i<4; i++) {
+            DisplayObject frame = new DisplayObject(paths[i], paths[i]);
+            this.frames.add(frame);
+        }
+    }
+
+    public Animation getAnimation(String id) {
+        for(int i = 0; i < this.animations.size(); i++) {
+            if(this.animations.get(i).getId() == id) {
+                return this.animations.get(i);
+            }
+        }
+    }
+
+
     /* Partner 2 - Part 3 and 4 */
     public void animate(Animation animateObject) {
         this.startFrame = animateObject.getStartFrame();
