@@ -23,7 +23,7 @@ public class DisplayObject {
 	private BufferedImage displayImage;
 
 	/* Lab 1 part 1 */
-	private Point position;
+	protected Point position;
 	private Point pivotPoint;
 	private float rotation;
 
