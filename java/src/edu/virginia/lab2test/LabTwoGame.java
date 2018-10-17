@@ -12,6 +12,8 @@ import java.awt.Graphics;
 public class LabTwoGame extends Game {
 
     AnimatedSprite mario = new AnimatedSprite("Mario", "mario_jump_0.png", new Point(100, 100));
+
+
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
@@ -29,11 +31,11 @@ public class LabTwoGame extends Game {
 
         Animation jump = new Animation("jump", 0, 1);
         Animation run = new Animation("run", 2, 3);
-        ArrayList<Animation> animations = new ArrayList<>();
+
+        ArrayList animations = new ArrayList();
         animations.add(jump);
         animations.add(run);
         mario.setAnimations(animations);
-
 
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
         if (mario != null) mario.update(pressedKeys);
@@ -41,22 +43,13 @@ public class LabTwoGame extends Game {
         /* Up, left, right */
         if (pressedKeys.contains(KeyEvent.VK_UP)) {
             mario.animate("jump");
-            if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-                mario.stopAnimation();
-            }
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             mario.animate("run");
-            if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-                mario.stopAnimation();
-            }
         }
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
             mario.animate("run");
-            if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-                mario.stopAnimation();
-            }
         }
 
         /* Plus and minus */

@@ -53,6 +53,7 @@ public class AnimatedSprite extends Sprite {
         if(this.playing) {
             if(this.gameClock.getElapsedTime() > this.animationSpeed) {
                 super.draw(g);
+                System.out.println("drawn");
 
             }
             //Once image is drawn, next frame is set and clock is reset
