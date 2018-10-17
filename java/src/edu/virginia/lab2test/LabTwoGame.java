@@ -29,7 +29,7 @@ public class LabTwoGame extends Game {
 
         Animation jump = new Animation("jump", 0, 1);
         Animation run = new Animation("run", 2, 3);
-        ArrayList<Animation> animations = new ArrayList<Animation>();
+        ArrayList<Animation> animations = new ArrayList<>();
         animations.add(jump);
         animations.add(run);
         mario.setAnimations(animations);
@@ -40,7 +40,6 @@ public class LabTwoGame extends Game {
 
         /* Up, left, right */
         if (pressedKeys.contains(KeyEvent.VK_UP)) {
-            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
             mario.animate("jump");
             if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
                 mario.stopAnimation();
@@ -48,14 +47,12 @@ public class LabTwoGame extends Game {
         }
 
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
-            mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
             mario.animate("run");
             if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
                 mario.stopAnimation();
             }
         }
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-            mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
             mario.animate("run");
             if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
                 mario.stopAnimation();
