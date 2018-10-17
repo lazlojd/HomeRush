@@ -8,6 +8,7 @@ import java.awt.Point;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 
+
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)

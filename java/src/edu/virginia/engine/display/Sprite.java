@@ -1,6 +1,7 @@
 package edu.virginia.engine.display;
 
 import java.util.ArrayList;
+import java.awt.*;
 
 /**
  * Nothing in this class (yet) because there is nothing specific to a Sprite yet that a DisplayObject

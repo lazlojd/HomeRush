@@ -2,18 +2,18 @@ package edu.virginia.engine.display;
 
 import edu.virginia.engine.util.GameClock;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.*;
-import java.lang.Thread;
 
 public class AnimatedSprite extends Sprite {
 
+    //Information about all animations
     static final int DEFAULT_ANIMATION_SPEED = 1000;
-
     private ArrayList<Animation> animations;
+    private ArrayList<BufferedImage> frames;
+    //Information about current animation playing
     private Boolean playing;
-    private String fileName;
-    private ArrayList<DisplayObject> frames;
     private Integer currentFrame;
     private Integer startFrame;
     private Integer endFrame;
@@ -23,10 +23,12 @@ public class AnimatedSprite extends Sprite {
 
 
     public AnimatedSprite(String id, String fileName, Point pos) {
-        super(id);
-        this.fileName = fileName;
+        super(id, fileName);
         this.position = pos;
-        this.gameClock = new GameClock();
+        this.animationSpeed = DEFAULT_ANIMATION_SPEED;
+        this.playing = false;
+        initGameClock();
+        initializeFrames();
     }
 
 
@@ -39,30 +41,38 @@ public class AnimatedSprite extends Sprite {
         this.animations = animations;
     }
 
+    public Integer getAnimationSpeed() { return this.animationSpeed; }
+
     public void setAnimationSpeed(Integer animationSpeed) {
         this.animationSpeed = animationSpeed;
     }
 
-    public void draw() {
+    public void draw(Graphics g) {
         currentFrame = startFrame;
-        while (currentFrame != endFrame) {
+        super.draw(g);
+        if(this.playing) {
+            if(this.gameClock.getElapsedTime() > this.animationSpeed) {
+                super.draw(g);
 
+            }
+            //Once image is drawn, next frame is set and clock is reset
+            currentFrame++;
+            this.setImage(this.frames.get(currentFrame));
+            this.gameClock.resetGameClock();
+            //Goes back to beginning of animation once end of animation is hit
+            if(currentFrame > endFrame) {
+                currentFrame = startFrame;
+            }
         }
-
-
     }
 
     /* Krishan */
-    public void loadFrames() { /* AKA initializeFrames */
-        ArrayList paths = new ArrayList;
-        paths.add("mario_jump_0.png");
-        paths.add("mario_jump_1.png");
-        paths.add("mario_run_0.png");
-        paths.add("mario_run_1.png");
-        for(int i = 0; i<4; i++) {
-            DisplayObject frame = new DisplayObject(paths[i], paths[i]);
-            this.frames.add(frame);
-        }
+    public void initializeFrames() {
+        frames = new ArrayList<>();
+        this.frames.add(readImage("mario_jump_0.png"));
+        this.frames.add(readImage("mario_jump_1.png"));
+        this.frames.add(readImage("mario_run_0.png"));
+        this.frames.add(readImage("mario_run_1.png"));
     }
 
     /* Krishan */
@@ -72,6 +82,7 @@ public class AnimatedSprite extends Sprite {
                 return this.animations.get(i);
             }
         }
+        return null;
     }
 
 
@@ -79,22 +90,23 @@ public class AnimatedSprite extends Sprite {
     public void animate(Animation animateObject) {
         this.startFrame = animateObject.getStartFrame();
         this.endFrame = animateObject.getEndFrame();
+        animate(startFrame, endFrame);
     }
     public void animate(String id) {
-
-
+        Animation animateObject = getAnimation(id);
+        animate(animateObject);
     }
     public void animate(Integer startFrame, Integer endFrame) {
         this.startFrame = startFrame;
         this.endFrame = endFrame;
+        this.playing = true;
     }
 
     public void stopAnimation(Integer frameNumber) {
-
+        this.playing = false;
+        this.setImage(this.frames.get(frameNumber));
     }
     public void stopAnimation() {
-
+        stopAnimation(this.startFrame);
     }
-
-
 }
