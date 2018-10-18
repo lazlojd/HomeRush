@@ -1,4 +1,4 @@
-package edu.virginia.lab1test;
+package edu.virginia.lab2test;
 
 import java.awt.Graphics;
 import java.security.Key;
