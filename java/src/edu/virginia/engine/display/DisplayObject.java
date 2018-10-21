@@ -16,6 +16,11 @@ import javax.imageio.ImageIO;
  * */
 public class DisplayObject {
 
+    /*
+     The root of a display tree will always be a DisplayObjectContainer
+     */
+	private DisplayObjectContainer displayTree;
+
 	/* All DisplayObject have a unique id */
 	private String id;
 
