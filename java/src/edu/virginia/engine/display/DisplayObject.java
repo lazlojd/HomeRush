@@ -19,7 +19,7 @@ public class DisplayObject {
     /*
      The root of a display tree will always be a DisplayObjectContainer
      */
-	private DisplayObjectContainer displayTree;
+	private DisplayObject parentObject;
 
 	/* All DisplayObject have a unique id */
 	private String id;
@@ -151,6 +151,45 @@ public class DisplayObject {
 	public void setRotation(float rotation) {
 		this.rotation = rotation;
 	}
+
+	/**
+	 * Convert local points to global points and global points to local points.
+	 * */
+
+	public Point localToGlobal(Point localPoint) {
+        Integer x = localPoint.x;
+        Integer y = localPoint.y;
+        DisplayObject tempObject = this;
+        while(tempObject.parentObject != null) {
+            tempObject = tempObject.parentObject;
+            Point tempPoint = new Point(tempObject.getPosition());
+            x += tempPoint.x;
+            y += tempPoint.y;
+        }
+        return new Point(x, y);
+    }
+
+    public Point globalToLocal(Point globalPoint) {
+	    Integer x = globalPoint.x;
+	    Integer y = globalPoint.y;
+        DisplayObject tempObject = this;
+        while(tempObject.parentObject != null) {
+            tempObject = tempObject.parentObject;
+            Point tempPoint = new Point(tempObject.getPosition());
+            x -= tempPoint.x;
+            y -= tempPoint.y;
+        }
+        return new Point(x, y);
+    }
+
+    public void setParentObject(DisplayObject parentObject) {
+	    this.parentObject = parentObject;
+    }
+
+    public void removeParentObject() {
+	    this.parentObject = null;
+    }
+
 
 
 	/**

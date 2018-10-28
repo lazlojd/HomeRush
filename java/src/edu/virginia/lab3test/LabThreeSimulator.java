@@ -3,28 +3,32 @@ package edu.virginia.lab3test;
 import edu.virginia.engine.display.*;
 
 import java.awt.Graphics;
-import java.security.Key;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.Point;
 
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.display.DisplayObject;
 
 public class LabThreeSimulator extends Game {
 
-    /* Create a sprite object for our game. We'll use mario */
-    AnimatedSprite mario = new AnimatedSprite("Mario", "mario_jump_0.png", new Point(0,0));
-
-    // See VK_V event block for usage details of visibilityBlocker
-    private int visibilityBlocker = 10;
+    /* Create a sprite object for our game. We'll use sun */
+    Sprite sun = new Sprite("Sun", "sun.png", new Point(50, 50));
+    Sprite planet_1 = new Sprite("Planet 1", "planet1.png", new Point(10, 10));
+    //Sprite planet_2 = new Sprite("Planet 2", "planet2.png", new Point(10, 10));
+    Sprite moon_1 = new Sprite("Moon 1", "moon.png", new Point(10,10));
+    //Sprite moon_2 = new Sprite("Moon 2", "moon.png", new Point(10,10));
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabThreeSimulator() {
 
-        super("Lab Two Test Game", 500, 300);
-
+        super("Lab Three Test Game", 1000, 600);
+        planet_1.addChild(moon_1);
+        sun.addChild(planet_1);
+        System.out.println(planet_1.localToGlobal(new Point(10,10)).toString());
+        System.out.println(moon_1.localToGlobal(new Point(10,10)).toString());
     }
 
     /**
@@ -35,129 +39,65 @@ public class LabThreeSimulator extends Game {
     public void update(ArrayList<Integer> pressedKeys){
         super.update(pressedKeys);
 
-        visibilityBlocker--;
-        if (visibilityBlocker == Integer.MAX_VALUE)
-            visibilityBlocker = 10;
-
-        /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
-        if (mario != null) mario.update(pressedKeys);
 
 
-        if (pressedKeys.contains(KeyEvent.VK_V)) {
-            /* visibilityBlocker only allows visbility to change once every 10 iterations of the loop
-             * This prevents V key events that last more than one iteration from producing
-             * no effect on the sprite
-             */
-            if (visibilityBlocker <= 0) {
-                mario.setVisible(!mario.getVisible());
-                visibilityBlocker = 10;
-            }
-            System.out.println(mario.getVisible());
-        }
+        /* Make sure sun is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
+        if (sun != null) sun.update(pressedKeys);
 
-        if (pressedKeys.contains(KeyEvent.VK_Z)) {
-            Float alpha = mario.getAlpha();
-            if (alpha + 0.01f <= 1) {
-                mario.setAlpha(mario.getAlpha() + 0.01f);
-            }
 
-            System.out.println(mario.getAlpha());
-            System.out.println("-------------");
+
+        /* Q & W Zoom in and out */
+        if (pressedKeys.contains(KeyEvent.VK_Q)) {
+            sun.setScaleX(sun.getScaleX() + 0.1);
+            sun.setScaleY(sun.getScaleY() + 0.1);
 
         }
 
-        if (pressedKeys.contains(KeyEvent.VK_X)) {
-            Float alpha = mario.getAlpha();
-            if (alpha - 0.01f >= 0) {
-                mario.setAlpha(mario.getAlpha() - 0.01f);
-            }
-            System.out.println(mario.getAlpha());
-            System.out.println("-------------");
-        }
-
-        if (pressedKeys.contains(KeyEvent.VK_A)) {
-            mario.setScaleX(mario.getScaleX() + 0.1);
-            mario.setScaleY(mario.getScaleY() + 0.1);
-
-        }
-
-        if (pressedKeys.contains(KeyEvent.VK_S)) {
-            if (mario.getScaleX() - 0.1 >= 0 || mario.getScaleY() - 0.1 >= 0) {
-                mario.setScaleX(mario.getScaleX() - 0.1);
-                mario.setScaleY(mario.getScaleY() -  0.1);
+        if (pressedKeys.contains(KeyEvent.VK_W)) {
+            if (sun.getScaleX() - 0.1 >= 0 || sun.getScaleY() - 0.1 >= 0) {
+                sun.setScaleX(sun.getScaleX() - 0.1);
+                sun.setScaleY(sun.getScaleY() -  0.1);
             }
 
         }
 
         /* Up, down, left, right */
         if(pressedKeys.contains(KeyEvent.VK_UP)) {
-            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - 5));
-            mario.animate("jump");
+            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y - 5));
         }
         if(pressedKeys.contains(KeyEvent.VK_DOWN)) {
-            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
-            mario.animate("jump");
+            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y + 5));
         }
         if(pressedKeys.contains(KeyEvent.VK_LEFT)) {
-            mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
-            mario.animate("run");
+            sun.setPosition(new Point(sun.getPosition().x - 5, sun.getPosition().y));
         }
         if(pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-            mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
-            mario.animate("run");
-        }
-
-        /* I,J,K,L Pivot Point */
-        if(pressedKeys.contains(KeyEvent.VK_I)) {
-            mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y - 5));
-        }
-        if(pressedKeys.contains(KeyEvent.VK_J)) {
-            mario.setPivotPoint(new Point(mario.getPivotPoint().x - 5, mario.getPivotPoint().y));
-        }
-        if(pressedKeys.contains(KeyEvent.VK_K)) {
-            mario.setPivotPoint(new Point(mario.getPivotPoint().x, mario.getPivotPoint().y + 5));
-        }
-        if(pressedKeys.contains(KeyEvent.VK_L)) {
-            mario.setPivotPoint(new Point(mario.getPivotPoint().x + 5, mario.getPivotPoint().y));
-        }
-
-        /* W and Q Rotation */
-        if(pressedKeys.contains(KeyEvent.VK_W)) {
-            mario.setRotation(mario.getRotation() + 5.0f);
-        }
-        if(pressedKeys.contains(KeyEvent.VK_Q)) {
-            mario.setRotation(mario.getRotation() - 5.0f);
-        }
-
-        if(pressedKeys.contains(KeyEvent.VK_D)) {
-            mario.setAnimationSpeed(mario.getAnimationSpeed()+10);
-        }
-
-        if(pressedKeys.contains(KeyEvent.VK_F)) {
-            mario.setAnimationSpeed(mario.getAnimationSpeed()-10);
-        }
-
-        if(mario != null && !pressedKeys.contains(KeyEvent.VK_LEFT) && !pressedKeys.contains(KeyEvent.VK_RIGHT)
-                && !pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) {
-            mario.stopAnimation(0);
+            sun.setPosition(new Point(sun.getPosition().x + 5, sun.getPosition().y));
         }
 
 
+        /* A and S Rotation */
+        if(pressedKeys.contains(KeyEvent.VK_A)) {
+            sun.setRotation(sun.getRotation() + 5.0f);
+        }
+        if(pressedKeys.contains(KeyEvent.VK_S)) {
+            sun.setRotation(sun.getRotation() - 5.0f);
+        }
     }
 
 
 
 
     /**
-     * Engine automatically invokes draw() every frame as well. If we want to make sure mario gets drawn to
-     * the screen, we need to make sure to override this method and call mario's draw method.
+     * Engine automatically invokes draw() every frame as well. If we want to make sure sun gets drawn to
+     * the screen, we need to make sure to override this method and call sun's draw method.
      * */
     @Override
     public void draw(Graphics g){
         super.draw(g);
 
-        /* Same, just check for null in case a frame gets thrown in before Mario is initialized */
-        if(mario != null) mario.draw(g);
+        /* Same, just check for null in case a frame gets thrown in before Sun is initialized */
+        if(sun != null) sun.draw(g);
     }
 
     /**
@@ -169,6 +109,7 @@ public class LabThreeSimulator extends Game {
         ((DisplayObjectContainer) test).getChildren();
         LabThreeSimulator game = new LabThreeSimulator();
         game.start();
+
 
     }
 }

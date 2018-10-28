@@ -23,12 +23,6 @@ public class DisplayObjectContainer extends DisplayObject {
     }
 
 
-
-    @Override
-    protected void update(ArrayList<Integer> pressedKeys) {
-
-    }
-
     public void draw(Graphics g) {
         super.draw(g);
         /*
@@ -47,26 +41,29 @@ public class DisplayObjectContainer extends DisplayObject {
     }
 
     /* Display object children: add and remove */
-    public void addChild(DisplayObjectContainer child) {
+    public void addChild(DisplayObject child) {
+        child.setParentObject(this);
         children.add(child);
-
     }
 
-    public void addChildAtIndex(DisplayObjectContainer child, Integer index) {
+    public void addChildAtIndex(DisplayObject child, Integer index) {
+        child.setParentObject(this);
         children.add(index, child);
-
     }
 
     public void removeChild(String id) {
         int len = children.size();
         for (int i = 0 ; i < len; i++) {
             DisplayObject currentChild = children.get(i);
-            if (currentChild.getId().compareTo(id) == 0)
+            if (currentChild.getId().compareTo(id) == 0) {
                 children.remove(i);
+            }
         }
     }
 
     public void removeChildAtIndex(Integer index) {
+        DisplayObject child = children.get(index);
+        child.removeParentObject();
         children.remove(index);
     }
 
