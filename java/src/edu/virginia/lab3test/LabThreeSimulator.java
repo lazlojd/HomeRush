@@ -12,23 +12,44 @@ import edu.virginia.engine.display.DisplayObject;
 
 public class LabThreeSimulator extends Game {
 
-    /* Create a sprite object for our game. We'll use sun */
-    Sprite sun = new Sprite("Sun", "sun.png", new Point(50, 50));
-    Sprite planet_1 = new Sprite("Planet 1", "planet1.png", new Point(10, 10));
+    /* Create a sprite object for our game. We'll use sun
+    *  With a 900 X 900 JFrame and a 50, 50 offset, the origin
+    *  point is effectively (-150, -150) and the right-bottom most point
+    *  is (650, 628). The y value of the second point is approximated.
+    *  It is unclear why it too shouldn't be 650
+    * */
+
+    Sprite sun = new Sprite("Sun", "sun-debug.png", new Point(0, 0));
+//    Sprite planet_1 = new Sprite("Planet 1", "planet1-adj.jpg", new Point(250, 529));
+    Sprite planet_1 = new Sprite("Planet 1", "planet1-debug.png", new Point(500, 500));
     //Sprite planet_2 = new Sprite("Planet 2", "planet2.png", new Point(10, 10));
-    Sprite moon_1 = new Sprite("Moon 1", "moon.png", new Point(10,10));
+    //Sprite moon_1 = new Sprite("Moon 1", "moon1-adj.jpg", new Point(-175,100));
     //Sprite moon_2 = new Sprite("Moon 2", "moon.png", new Point(10,10));
+
+
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabThreeSimulator() {
 
-        super("Lab Three Test Game", 1000, 600);
-        planet_1.addChild(moon_1);
+
+        super("Lab Three Test Game", 900, 900);
+       // planet_1.addChild(moon_1);
+        /*
+        * Because planet_1 is a 200 x 200 square images, and the default pivot point
+        * is the upper-left corner of the image, we need to compensate by moving point
+        * over to 100 in positive x direction (center x coordinate) and y up.
+        * The amount to move y is the position we place the planet in the code above and
+        * less the position of the center of the canvas (i.e. the sun)
+        *
+        * */
+
+        //moon_1.setPivotPoint(new Point(moon_1.getPosition().x + 25, moon_1.getPosition().y + 50));
+        planet_1.setPivotPoint(new Point(planet_1.getPivotPoint().x - 100, planet_1.getPivotPoint().y - 100));
         sun.addChild(planet_1);
         System.out.println(planet_1.localToGlobal(new Point(10,10)).toString());
-        System.out.println(moon_1.localToGlobal(new Point(10,10)).toString());
+//        System.out.println(moon_1.localToGlobal(new Point(10,10)).toString());
     }
 
     /**
@@ -83,6 +104,10 @@ public class LabThreeSimulator extends Game {
         if(pressedKeys.contains(KeyEvent.VK_S)) {
             sun.setRotation(sun.getRotation() - 5.0f);
         }
+        planet_1.setRotation(planet_1.getRotation() + 1.0f);
+
+//        moon_1.setPivotPoint(new Point(planet_1.getPosition().x + 100, planet_1.getPosition().y + 100));
+//        moon_1.setRotation(moon_1.getRotation() + 0.5f);
     }
 
 
