@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24ef20ee-d403-420f-9da4-1215ccfa04f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/lab3test/LabThreeSimulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/lab3test/LabThreeSimulator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,22 +28,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="7" />
+          <entry key="java" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="7" />
+          <entry key="JAVA" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3361" />
+          <entry key="java" value="4006" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3361" />
+          <entry key="JAVA" value="4006" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.spring.boot.run.usages" />
@@ -82,11 +84,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab3test/LabThreeSimulator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="25" column="73" lean-forward="true" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
+            <state relative-caret-position="487">
+              <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObjectContainer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="152">
+              <caret line="312" column="36" lean-forward="true" selection-start-line="312" selection-start-column="36" selection-end-line="312" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,8 +169,8 @@
       <list>
         <option value="$PROJECT_DIR$/java/src/edu/virginia/engine/display/Sprite.java" />
         <option value="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObjectContainer.java" />
-        <option value="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" />
         <option value="$PROJECT_DIR$/java/src/edu/virginia/lab3test/LabThreeSimulator.java" />
+        <option value="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" />
       </list>
     </option>
   </component>
@@ -158,9 +181,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="765" />
+    <option name="x" value="664" />
     <option name="y" value="23" />
-    <option name="width" value="915" />
+    <option name="width" value="1016" />
     <option name="height" value="973" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -247,7 +270,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540914982786" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540924549033" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -316,12 +339,12 @@
       <option name="presentableId" value="Default" />
       <updated>1540071401487</updated>
       <workItem from="1540071403297" duration="4611000" />
-      <workItem from="1540846723629" duration="19424000" />
+      <workItem from="1540846723629" duration="22497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24351000" />
+    <option name="totallyTimeSpent" value="27424000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,10 +356,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="765" y="23" width="915" height="973" extended-state="0" />
+    <frame x="664" y="23" width="1016" height="973" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.209622" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21663244" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -380,10 +403,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab2test/LabTwoGame.java">
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="10" selection-end-column="42" />
+        <state relative-caret-position="515">
+          <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -400,31 +430,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab1test/LabOneGame.java">
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab2test/LabTwoGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
-          <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="182" selection-start-line="182" selection-end-line="182" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObjectContainer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="58" column="35" lean-forward="true" selection-start-line="58" selection-start-column="35" selection-end-line="58" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="10" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -433,8 +442,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab3test/LabThreeSimulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="25" column="73" lean-forward="true" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
+        <state relative-caret-position="487">
+          <caret line="110" column="8" selection-start-line="110" selection-start-column="8" selection-end-line="110" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObjectContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="312" column="36" lean-forward="true" selection-start-line="312" selection-start-column="36" selection-end-line="312" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

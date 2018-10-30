@@ -23,7 +23,7 @@ public class LabThreeSimulator extends Game {
 //    Sprite planet_1 = new Sprite("Planet 1", "planet1-adj.jpg", new Point(250, 529));
     Sprite planet_1 = new Sprite("Planet 1", "planet1-debug.png", new Point(500, 500));
     //Sprite planet_2 = new Sprite("Planet 2", "planet2.png", new Point(10, 10));
-    Sprite moon_1 = new Sprite("Moon 1", "moon1-debug.png", new Point( 0,0));
+    Sprite moon_1 = new Sprite("Moon 1", "moon1-debug.png", new Point( -500,-500));
     //Sprite moon_2 = new Sprite("Moon 2", "moon.png", new Point(10,10));
 
 
@@ -35,11 +35,11 @@ public class LabThreeSimulator extends Game {
 
 
         super("Lab Three Test Game", 900, 900);
-        //moon_1.setPivotPoint(moon_1.localToGlobal());
+        //moon_1.setPivotPoint(planet_1.localToGlobal(planet_1.getPosition()));
         System.out.println("moon pivot: " + moon_1.getPivotPoint());
         System.out.println("moon position: " + moon_1.getPosition());
 
-        sun.addChild(moon_1);
+        planet_1.addChild(moon_1);
         /*
         * Because planet_1 is a 200 x 200 square images, and the default pivot point
         * is the upper-left corner of the image, we need to compensate by moving point
@@ -88,16 +88,16 @@ public class LabThreeSimulator extends Game {
 
         /* Up, down, left, right */
         if(pressedKeys.contains(KeyEvent.VK_UP)) {
-            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y - 5));
+            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y - 1));
         }
         if(pressedKeys.contains(KeyEvent.VK_DOWN)) {
-            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y + 5));
+            sun.setPosition(new Point(sun.getPosition().x, sun.getPosition().y + 1));
         }
         if(pressedKeys.contains(KeyEvent.VK_LEFT)) {
-            sun.setPosition(new Point(sun.getPosition().x - 5, sun.getPosition().y));
+            sun.setPosition(new Point(sun.getPosition().x - 1, sun.getPosition().y));
         }
         if(pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-            sun.setPosition(new Point(sun.getPosition().x + 5, sun.getPosition().y));
+            sun.setPosition(new Point(sun.getPosition().x + 1, sun.getPosition().y));
         }
 
 
@@ -108,10 +108,10 @@ public class LabThreeSimulator extends Game {
         if(pressedKeys.contains(KeyEvent.VK_S)) {
             sun.setRotation(sun.getRotation() - 5.0f);
         }
-//      planet_1.setRotation(planet_1.getRotation() + 1.0f);
+      //planet_1.setRotation(planet_1.getRotation() + 1.0f);
 
 //
-        //moon_1.setRotation(moon_1.getRotation() + 0.5f);
+        moon_1.setRotation(moon_1.getRotation() + 0.5f);
     }
 
 

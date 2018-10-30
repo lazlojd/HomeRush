@@ -20,6 +20,7 @@ public class DisplayObject {
      The root of a display tree will always be a DisplayObjectContainer
      */
 	private DisplayObject parentObject;
+	private Graphics2D last;
 
 	/* All DisplayObject have a unique id */
 	private String id;
@@ -39,18 +40,16 @@ public class DisplayObject {
 	public Double scaleX;
 	public Double scaleY;
 
-	private int visibleHelper;
 
-	// Initialize visible to true, alpha to 1.0f, oldAlpha to 0.0f, and scaleX/scaleY to 1.0.
-	private void init2() {
-		this.visible = true;
-		this.alpha = 1.0f;
-		this.oldAlpha = 0.0f;
-		this.scaleX = 1.0;
-		this.scaleY = 1.0;
-		this.visibleHelper = 1;
-	}
-	
+	////
+    protected Point lastPosition;
+    private Point lastPivotPoint;
+    private float lastRotation;
+    public Boolean lastVisible;
+    public Double lastScaleX;
+    public Double lastScaleY;
+
+	private int visibleHelper;
 
 
 	/**
@@ -61,20 +60,33 @@ public class DisplayObject {
 
 		this.setId(id);
 		init();
-		init2();
 	}
 
 	public DisplayObject(String id, String fileName) {
 		this.setId(id);
 		this.setImage(fileName);
 		init();
-		init2();
 	}
 
 	private void init() {
 	    this.position = new Point(0,0);
 	    this.pivotPoint = new Point(0,0);
 	    this.rotation = 0.0f;
+        this.visible = true;
+        this.alpha = 1.0f;
+        this.oldAlpha = 0.0f;
+        this.scaleX = 1.0;
+        this.scaleY = 1.0;
+        this.visibleHelper = 1;
+
+        // Old value holders
+        this.lastPosition = this.position;
+        this.lastPivotPoint = this.pivotPoint;
+        this.lastRotation = this.rotation;
+        this.lastVisible = this.visible;
+        this.lastScaleX = this.scaleX;
+        this.lastScaleY = this.scaleY;
+
 	}
 	
 	public Boolean getVisible() {
@@ -115,11 +127,13 @@ public class DisplayObject {
 	}
 
 	public void setScaleX(Double scaleX) {
+	    this.lastScaleX = this.scaleX;
 		this.scaleX = scaleX;
 	}
 
 	public void setScaleY(Double scaleY) {
-		this.scaleY = scaleY;
+		this.lastScaleY = scaleY;
+	    this.scaleY = scaleY;
 	}
 
 	public void setId(String id) {
@@ -141,15 +155,18 @@ public class DisplayObject {
 	}
 
 	public void setPosition(Point position) {
-		this.position = position;
+		this.lastPosition = this.position;
+	    this.position = position;
 	}
 
 	public void setPivotPoint(Point pivotPoint) {
-		this.pivotPoint = pivotPoint;
+		this.lastPivotPoint = this.pivotPoint;
+	    this.pivotPoint = pivotPoint;
 	}
 
 	public void setRotation(float rotation) {
-		this.rotation = rotation;
+		this.lastRotation = this.rotation;
+	    this.rotation = rotation;
 	}
 
 	/**
@@ -233,6 +250,7 @@ public class DisplayObject {
 			System.out.println("[Error in DisplayObject.java:readImage] Could not read image " + imageName);
 			e.printStackTrace();
 		}
+		//System.out.println(imageName + "height: " + image.getHeight() + " width: " + image.getWidth());
 		return image;
 	}
 
@@ -302,8 +320,12 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
-            g2d.setComposite(AlphaComposite.getInstance(3,
+	    g2d.setComposite(AlphaComposite.getInstance(3,
                     this.oldAlpha));
+        g2d.scale(this.lastScaleX, this.lastScaleY);
+        g2d.rotate(Math.toRadians(this.lastRotation), this.lastPivotPoint.x, this.lastPivotPoint.y);
+        g2d.translate(this.lastPosition.x, this.lastPosition.y);
+
 
 	}
 
