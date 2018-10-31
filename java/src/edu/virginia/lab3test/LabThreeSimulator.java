@@ -13,11 +13,11 @@ import edu.virginia.engine.display.DisplayObject;
 public class LabThreeSimulator extends Game {
 
     /* Create a sprite object for our game. We'll use sun
-    *  With a 900 X 900 JFrame and a 50, 50 offset, the origin
-    *  point is effectively (-150, -150) and the right-bottom most point
-    *  is (650, 628). The y value of the second point is approximated.
-    *  It is unclear why it too shouldn't be 650
-    * */
+     *  With a 900 X 900 JFrame and a 50, 50 offset, the origin
+     *  point is effectively (-150, -150) and the right-bottom most point
+     *  is (650, 628). The y value of the second point is approximated.
+     *  It is unclear why it too shouldn't be 650
+     * */
 
 
     Sprite center = new Sprite("Center", "blank.png", new Point(400,400));
@@ -126,7 +126,5 @@ public class LabThreeSimulator extends Game {
     public static void main(String[] args) {
         LabThreeSimulator game = new LabThreeSimulator();
         game.start();
-
-
     }
 }
