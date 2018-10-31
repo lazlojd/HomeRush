@@ -42,15 +42,12 @@ public class DisplayObject {
 	public Double scaleY;
 
 
-	////
-    protected Point lastPosition;
-    private Point lastPivotPoint;
-    private float lastRotation;
-    public Boolean lastVisible;
-    public Double lastScaleX;
-    public Double lastScaleY;
+
 
 	private int visibleHelper;
+
+	// Use of AffineTransform sourced from
+	// http://www.java-gaming.org/index.php/topic,25177
 	private AffineTransform old;
 
 
@@ -80,14 +77,6 @@ public class DisplayObject {
         this.scaleX = 1.0;
         this.scaleY = 1.0;
         this.visibleHelper = 1;
-
-        // Old value holders
-        this.lastPosition = this.position;
-        this.lastPivotPoint = this.pivotPoint;
-        this.lastRotation = this.rotation;
-        this.lastVisible = this.visible;
-        this.lastScaleX = this.scaleX;
-        this.lastScaleY = this.scaleY;
 
 	}
 	
@@ -129,12 +118,10 @@ public class DisplayObject {
 	}
 
 	public void setScaleX(Double scaleX) {
-	    this.lastScaleX = this.scaleX;
 		this.scaleX = scaleX;
 	}
 
 	public void setScaleY(Double scaleY) {
-		this.lastScaleY = scaleY;
 	    this.scaleY = scaleY;
 	}
 
@@ -157,17 +144,14 @@ public class DisplayObject {
 	}
 
 	public void setPosition(Point position) {
-		this.lastPosition = this.position;
 	    this.position = position;
 	}
 
 	public void setPivotPoint(Point pivotPoint) {
-		this.lastPivotPoint = this.pivotPoint;
 	    this.pivotPoint = pivotPoint;
 	}
 
 	public void setRotation(float rotation) {
-		this.lastRotation = this.rotation;
 	    this.rotation = rotation;
 	}
 
