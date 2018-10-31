@@ -18,42 +18,41 @@ public class LabThreeSimulator extends Game {
     *  is (650, 628). The y value of the second point is approximated.
     *  It is unclear why it too shouldn't be 650
     * */
+//
+//    Sprite sun = new Sprite("Sun", "sun-debug.png", new Point(0, 0));
+////    Sprite planet_1 = new Sprite("Planet 1", "planet1-adj.jpg", new Point(250, 529));
+//    Sprite planet_1 = new Sprite("Planet 1", "planet1-debug.png", new Point(500, 500));
+//    //Sprite planet_2 = new Sprite("Planet 2", "planet2.png", new Point(10, 10));
+//    Sprite moon_1 = new Sprite("Moon 1", "moon1-debug.png", new Point( 0,0));
+//    //Sprite moon_2 = new Sprite("Moon 2", "moon.png", new Point(10,10));
 
-    Sprite sun = new Sprite("Sun", "sun-debug.png", new Point(0, 0));
-//    Sprite planet_1 = new Sprite("Planet 1", "planet1-adj.jpg", new Point(250, 529));
-    Sprite planet_1 = new Sprite("Planet 1", "planet1-debug.png", new Point(500, 500));
-    //Sprite planet_2 = new Sprite("Planet 2", "planet2.png", new Point(10, 10));
-    Sprite moon_1 = new Sprite("Moon 1", "moon1-debug.png", new Point( -500,-500));
-    //Sprite moon_2 = new Sprite("Moon 2", "moon.png", new Point(10,10));
+    Sprite sun = new Sprite("Sun", "sun-adj.jpg", new Point(50, 50));
+    Sprite planetOne = new Sprite("Planet 1", "planet1.png", new Point(500, 500));
+    Sprite moonOne = new Sprite("Moon 1", "moon-adj.png", new Point( -30,-30));
 
-
+    Sprite planetTwo = new Sprite("Planet 2", "planet2.png", new Point(100, 100));
+    Sprite moonTwo = new Sprite("Moon 2", "moon-adj.png", new Point( -30,-30));
 
     /**
      * Constructor. See constructor in Game.java for details on the parameters given
      * */
     public LabThreeSimulator() {
-
-
         super("Lab Three Test Game", 900, 900);
-        //moon_1.setPivotPoint(planet_1.localToGlobal(planet_1.getPosition()));
-        System.out.println("moon pivot: " + moon_1.getPivotPoint());
-        System.out.println("moon position: " + moon_1.getPosition());
 
-        planet_1.addChild(moon_1);
-        /*
-        * Because planet_1 is a 200 x 200 square images, and the default pivot point
-        * is the upper-left corner of the image, we need to compensate by moving point
-        * over to 100 in positive x direction (center x coordinate) and y up.
-        * The amount to move y is the position we place the planet in the code above and
-        * less the position of the center of the canvas (i.e. the sun)
-        *
-        * */
+//        Sprite sun = new Sprite("Sun", "sun-debug.png", new Point(0, 0));
+//        Sprite planetOne = new Sprite("Planet 1", "planet1-debug.png", new Point(500, 500));
+//        Sprite moonOne = new Sprite("Moon 1", "moon1-debug.png", new Point( 0,0));
 
-        //moon_1.setPivotPoint(new Point(moon_1.getPosition().x + 25, moon_1.getPosition().y + 50));
-        planet_1.setPivotPoint(new Point(planet_1.getPivotPoint().x - 100, planet_1.getPivotPoint().y - 100));
-        sun.addChild(planet_1);
-        System.out.println(planet_1.localToGlobal(new Point(10,10)).toString());
-//        System.out.println(moon_1.localToGlobal(new Point(10,10)).toString());
+        moonOne.setPivotPoint(new Point(80, 80));
+        planetOne.addChild(moonOne);
+        planetOne.setPivotPoint(new Point(planetOne.getPivotPoint().x - 100, planetOne.getPivotPoint().y - 100));
+
+        moonTwo.setPivotPoint(new Point(80, 80));
+        planetTwo.addChild(moonTwo);
+        planetTwo.setPivotPoint(new Point(planetTwo.getPivotPoint().x + 300, planetTwo.getPivotPoint().y + 300));
+        sun.addChild(planetOne);
+        sun.addChild(planetTwo);
+        //System.out.println(planetOne.localToGlobal(new Point(10,10)).toString());
     }
 
     /**
@@ -108,10 +107,12 @@ public class LabThreeSimulator extends Game {
         if(pressedKeys.contains(KeyEvent.VK_S)) {
             sun.setRotation(sun.getRotation() - 5.0f);
         }
-      //planet_1.setRotation(planet_1.getRotation() + 1.0f);
+        moonTwo.setRotation(moonTwo.getRotation() + 0.5f);
+        moonOne.setRotation(moonOne.getRotation() + 3.0f);
+        planetOne.setRotation(planetOne.getRotation() + 1.0f);
+        planetTwo.setRotation(planetTwo.getRotation() + 3.0f);
 
-//
-        moon_1.setRotation(moon_1.getRotation() + 0.5f);
+
     }
 
 

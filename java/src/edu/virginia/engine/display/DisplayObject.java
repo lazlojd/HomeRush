@@ -1,6 +1,7 @@
 package edu.virginia.engine.display;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class DisplayObject {
     public Double lastScaleY;
 
 	private int visibleHelper;
+	private AffineTransform old;
 
 
 	/**
@@ -304,6 +306,7 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
+        old = g2d.getTransform();
 	    g2d.translate(this.position.x, this.position.y);
 	    g2d.rotate(Math.toRadians(this.getRotation()), this.getPivotPoint().x, this.getPivotPoint().y);
 		g2d.scale(this.scaleX, this.scaleY);
@@ -320,11 +323,12 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
-	    g2d.setComposite(AlphaComposite.getInstance(3,
-                    this.oldAlpha));
-        g2d.scale(this.lastScaleX, this.lastScaleY);
-        g2d.rotate(Math.toRadians(this.lastRotation), this.lastPivotPoint.x, this.lastPivotPoint.y);
-        g2d.translate(this.lastPosition.x, this.lastPosition.y);
+	    g2d.setTransform(old);
+//	    g2d.setComposite(AlphaComposite.getInstance(3,
+//                    this.oldAlpha));
+//        g2d.scale(this.lastScaleX, this.lastScaleY);
+//        g2d.rotate(Math.toRadians(this.lastRotation), this.lastPivotPoint.x, this.lastPivotPoint.y);
+//        g2d.translate(this.lastPosition.x, this.lastPosition.y);
 
 
 	}

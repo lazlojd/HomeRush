@@ -22,6 +22,13 @@ public class DisplayObjectContainer extends DisplayObject {
         children = new ArrayList<DisplayObject>();
     }
 
+    public void update(ArrayList<Integer> pressedKeys) {
+        super.update(pressedKeys);
+
+        for (DisplayObject child : children) {
+            child.update(pressedKeys);
+        }
+    }
 
     public void draw(Graphics g) {
         super.draw(g);
