@@ -11,17 +11,9 @@ import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.DisplayObject;
 
 public class LabThreeSimulator extends Game {
-
-    /* Create a sprite object for our game. We'll use sun
-     *  With a 900 X 900 JFrame and a 50, 50 offset, the origin
-     *  point is effectively (-150, -150) and the right-bottom most point
-     *  is (650, 628). The y value of the second point is approximated.
-     *  It is unclear why it too shouldn't be 650
-     * */
-
-
     Sprite center = new Sprite("Center", "blank.png", new Point(400,400));
     Sprite sun = new Sprite("Sun", "sun-adj.jpg", new Point(-400, -400));
+
     Sprite planetOne = new Sprite("Planet 1", "planet1.png", new Point(500, 500));
     Sprite moonOne = new Sprite("Moon 1", "moon-adj.png", new Point( -30,-30));
 

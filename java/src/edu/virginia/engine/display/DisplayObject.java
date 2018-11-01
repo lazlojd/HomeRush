@@ -193,6 +193,18 @@ public class DisplayObject {
 	    this.parentObject = null;
     }
 
+    public void getLocalHitbox() {
+
+	}
+
+	public void getGlobalHitbox() {
+
+	}
+
+	public Boolean collidesWith(DisplayObject other) {
+		return true;
+	}
+
 
 
 	/**
@@ -313,8 +325,7 @@ public class DisplayObject {
 //        g2d.scale(this.lastScaleX, this.lastScaleY);
 //        g2d.rotate(Math.toRadians(this.lastRotation), this.lastPivotPoint.x, this.lastPivotPoint.y);
 //        g2d.translate(this.lastPosition.x, this.lastPosition.y);
-
-
+		
 	}
 
 }
