@@ -6,9 +6,12 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 public class LabFourGame extends Game {
     Sprite mario = new Sprite("Mario", "mario.png");
+    Sprite bowser = new Sprite("Bowser", "bowser.png");
+    Sprite luigi = new Sprite("Luigi", "luigi.png")
     private int visibilityBlocker = 10;
 
     public LabFourGame() {

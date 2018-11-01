@@ -193,13 +193,11 @@ public class DisplayObject {
 	    this.parentObject = null;
     }
 
-    public void getLocalHitbox() {
-
+    public Rectangle getHitbox() {
+		Rectangle hitbox = new Rectangle();
+		return hitbox;
 	}
 
-	public void getGlobalHitbox() {
-
-	}
 
 	public Boolean collidesWith(DisplayObject other) {
 		return true;
