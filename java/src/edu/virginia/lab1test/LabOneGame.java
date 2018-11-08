@@ -43,7 +43,7 @@ public class LabOneGame extends Game{
 
 
 		if (pressedKeys.contains(KeyEvent.VK_V)) {
-			/* visibilityBlocker only allows visbility to change once every 10 iterations of the loop
+			/* visibilityBlocker only allows visibility to change once every 10 iterations of the loop
 			 * This prevents V key events that last more than one iteration from producing
 			 * no effect on the sprite
 			 */

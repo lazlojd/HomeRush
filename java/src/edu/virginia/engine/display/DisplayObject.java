@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.geom.Area;
 
 import javax.imageio.ImageIO;
 
@@ -21,7 +22,6 @@ public class DisplayObject {
      The root of a display tree will always be a DisplayObjectContainer
      */
 	private DisplayObject parentObject;
-	private Graphics2D last;
 
 	/* All DisplayObject have a unique id */
 	private String id;
@@ -41,7 +41,8 @@ public class DisplayObject {
 	public Double scaleX;
 	public Double scaleY;
 
-
+	/* Lab 4 */
+	private Shape hitbox;
 
 
 	private int visibleHelper;
@@ -79,6 +80,12 @@ public class DisplayObject {
         this.visibleHelper = 1;
 
 	}
+
+	public void initializeRectangleHitbox() {
+	    this.hitbox = new Rectangle(this.getPosition().x, this.getPosition().y,
+				this.getUnscaledWidth(), this.getUnscaledHeight());
+	    System.out.println(this.hitbox.getBounds());
+    }
 	
 	public Boolean getVisible() {
 		return this.visible;
@@ -193,15 +200,41 @@ public class DisplayObject {
 	    this.parentObject = null;
     }
 
-    public Rectangle getHitbox() {
-		Rectangle hitbox = new Rectangle();
-		return hitbox;
+    public Shape getHitbox() {
+		return this.hitbox;
 	}
 
 
-	public Boolean collidesWith(DisplayObject other) {
-		return true;
+	public boolean collidesWith(DisplayObject other) {
+	    Area thisHitbox = new Area(this.hitbox);
+	    Area otherHitbox = new Area(other.hitbox);
+	    thisHitbox.intersect(otherHitbox);
+	    return !thisHitbox.isEmpty();
 	}
+
+	//Translation
+	public void updateHitbox(int translateX, int translateY) {
+		AffineTransform ht = new AffineTransform();
+		ht.setToTranslation(translateX, translateY);
+		this.hitbox = ht.createTransformedShape(this.getHitbox());
+		System.out.println(this.hitbox.getBounds());
+	}
+
+	//Rotation
+	public void updateHitbox(float rotationValue) {
+		AffineTransform ht = new AffineTransform();
+		ht.setToRotation(Math.toRadians(rotationValue), this.getPivotPoint().x, this.getPivotPoint().y);
+		this.hitbox = ht.createTransformedShape(this.getHitbox());
+	}
+
+	//Scaling
+	public void updateHitbox(double scale) {
+		AffineTransform ht = new AffineTransform();
+		ht.setToScale(this.getScaleX() + scale, this.getScaleY() + scale);
+		this.hitbox = ht.createTransformedShape(this.getHitbox());
+	}
+
+
 
 
 
@@ -280,18 +313,23 @@ public class DisplayObject {
 			 * (rotation, etc.)
 			 */
 			Graphics2D g2d = (Graphics2D) g;
+
 			applyTransformations(g2d);
 
 			/* Actually draw the image, perform the pivot point translation here */
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			
+			g2d.draw(this.hitbox);
+
+
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
 			 */
 			reverseTransformations(g2d);
+
+
 		}
 	}
 
@@ -309,7 +347,6 @@ public class DisplayObject {
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
-
 	}
 
 	/**
@@ -318,12 +355,6 @@ public class DisplayObject {
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
 	    g2d.setTransform(old);
-//	    g2d.setComposite(AlphaComposite.getInstance(3,
-//                    this.oldAlpha));
-//        g2d.scale(this.lastScaleX, this.lastScaleY);
-//        g2d.rotate(Math.toRadians(this.lastRotation), this.lastPivotPoint.x, this.lastPivotPoint.y);
-//        g2d.translate(this.lastPosition.x, this.lastPosition.y);
-		
 	}
 
 }
