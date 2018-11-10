@@ -54,6 +54,7 @@ public class SoundManager {
             AudioInputStream gameSound = AudioSystem.getAudioInputStream(audioFile);
             clip.close();
             clip.open(gameSound);
+            clip.setFramePosition(0);
             clip.start();
 
             //clip.close();
@@ -63,8 +64,8 @@ public class SoundManager {
         while(clip.getMicrosecondLength() != clip.getMicrosecondPosition()) {
 
         }
-        if (playing)
-            this.PlayMusic(this.currentlyPlaying);
+
+
 
     }
 
@@ -81,6 +82,7 @@ public class SoundManager {
             AudioInputStream gameSound = AudioSystem.getAudioInputStream(audioFile);
             clip.close();
             clip.open(gameSound);
+            clip.setFramePosition(0);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             //clip.close();
@@ -88,33 +90,18 @@ public class SoundManager {
             System.err.println(e);
         }
         playing = true;
-//        int len = music.size();
-//        if (len == 1) {
-//            clip.start();
-//        } else if (len > 1) {
-//            ArrayList<File> audiofiles = (ArrayList<File>) music.values();
-//            try {
-//                AudioInputStream mergedMusic = AudioSystem.getAudioInputStream(audiofiles.get(0));
-//                int size = audiofiles.size();
-//                for (int i = 1; i < size; i++) {
-//                    AudioInputStream next = AudioSystem.getAudioInputStream(audiofiles.get(i));
-//                    mergedMusic = new AudioInputStream(
-//                            new SequenceInputStream(mergedMusic, next),
-//                            mergedMusic.getFormat(),
-//                            mergedMusic.getFrameLength() + next.getFrameLength());
-//                }
-//                clip.open(mergedMusic);
-//                clip.start();
-//            } catch (Exception e) {
-//                System.err.println(e);
-//            }
-//        }
-//
-//        try {
-//            clip.loop(Clip.LOOP_CONTINUOUSLY);
-//        } catch (Exception e) {
-//            System.err.println((e));
-//        }
+    }
+
+    public void play() {
+        clip.setFramePosition(0);
+        clip.start();
+    }
+    public void loop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public void stop(){
+        clip.stop();
     }
 
 }

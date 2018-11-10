@@ -25,6 +25,7 @@ public class LabFourGame extends Game {
     private int score = 5;
     private boolean reverseMotion = false;
     private boolean didWin = false;
+    private String currentlyPlaying;
 
     public LabFourGame() {
         super("Lab Four Test Game", 900, 900);
@@ -60,6 +61,7 @@ public class LabFourGame extends Game {
         soundManager.LoadSoundEffect("bowserCollision", "dead.wav");
         soundManager.LoadSoundEffect("luigiCollision", "win.wav");
         soundManager.LoadMusic("bgMusic", "game_music.wav");
+        this.currentlyPlaying = "bgMusic";
         soundManager.PlayMusic("bgMusic");
     }
 
@@ -79,12 +81,13 @@ public class LabFourGame extends Game {
         if (visibilityBlocker == Integer.MAX_VALUE)
             visibilityBlocker = 10;
 
-        if(mario.collidesWith(bowser))
+        if(mario.collidesWith(bowser) || bowser.collidesWith((mario)))
         {
             score -= 1;
             System.out.println("removing mushroomS" + score);
             background.removeChild("mushroomS" + (score));
             soundManager.PlaySoundEffect("bowserCollision");
+            soundManager.PlayMusic(this.currentlyPlaying);
             mario.setPosition(new Point(0,0));
             mario.initializeRectangleHitbox();
         }

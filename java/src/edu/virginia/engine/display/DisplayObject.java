@@ -48,6 +48,7 @@ public class DisplayObject {
 
 	private int visibleHelper;
 
+
 	// Use of AffineTransform sourced from
 	// http://www.java-gaming.org/index.php/topic,25177
 	private AffineTransform old;
