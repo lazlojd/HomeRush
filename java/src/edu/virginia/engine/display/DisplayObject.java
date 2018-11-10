@@ -323,7 +323,7 @@ public class DisplayObject {
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
 			if (this.hitbox != null)
-				g2d.draw(this.hitbox);
+				//g2d.draw(this.hitbox);
 
 
 			/*

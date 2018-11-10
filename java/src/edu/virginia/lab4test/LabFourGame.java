@@ -37,13 +37,19 @@ public class LabFourGame extends Game {
         background.addChild(mushroomScore3);
         background.addChild(mushroomScore4);
         background.addChild(winScreen);
-        winScreen.setPosition(new Point(300,300));
+        winScreen.setPosition(new Point(-300,300));
         winScreen.setVisible(false);
-        mushroomScore4.setPosition((new Point(800, 10)));
-        mushroomScore3.setPosition((new Point(750, 10)));
-        mushroomScore2.setPosition((new Point(700, 10)));
-        mushroomScore1.setPosition((new Point(650, 10)));
-        mushroomScore0.setPosition((new Point(600, 10)));
+        // The position setting below are all acting as offsets off the previous mushroom
+        // very weird!
+        mushroomScore0.setPosition(new Point(600, 10));
+        mushroomScore1.setPosition(new Point(50, 0));
+        mushroomScore2.setPosition(new Point(50, 0));
+        mushroomScore3.setPosition(new Point(50, 0));
+        mushroomScore4.setPosition(new Point(50, 0));
+
+
+
+
         luigi.setPosition(new Point(600,600));
         bowser.setPosition(new Point(300,300));
 //        mushroomScore0.initializeRectangleHitbox();
