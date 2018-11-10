@@ -10,19 +10,51 @@ import java.awt.event.KeyEvent;
 import edu.virginia.engine.display.Game;
 
 public class LabFourGame extends Game {
+    Sprite background = new Sprite("bg", "blank.png");
     Sprite mario = new Sprite("Mario", "mario.png");
     Sprite bowser = new Sprite("Bowser", "bowser.png");
     Sprite luigi = new Sprite("Luigi", "luigi.png");
+    Sprite winScreen = new Sprite("win", "winner.jpeg");
+    Sprite mushroomScore0 = new Sprite("mushroomS0", "mushroom.png");
+    Sprite mushroomScore1 = new Sprite("mushroomS1", "mushroom.png");
+    Sprite mushroomScore2 = new Sprite("mushroomS2", "mushroom.png");
+    Sprite mushroomScore3 = new Sprite("mushroomS3", "mushroom.png");
+    Sprite mushroomScore4 = new Sprite("mushroomS4", "mushroom.png");
+    SoundManager soundManager;
     private int visibilityBlocker = 10;
-    private int score = 0;
+    private int score = 5;
+    private boolean reverseMotion = false;
+    private boolean didWin = false;
 
     public LabFourGame() {
         super("Lab Four Test Game", 900, 900);
+        background.addChild(luigi);
+        background.addChild(mario);
+        background.addChild(bowser);
+        background.addChild(mushroomScore0);
+        background.addChild(mushroomScore1);
+        background.addChild(mushroomScore2);
+        background.addChild(mushroomScore3);
+        background.addChild(mushroomScore4);
+        background.addChild(winScreen);
+        winScreen.setPosition(new Point(300,300));
+        winScreen.setVisible(false);
+        mushroomScore4.setPosition((new Point(800, 10)));
+        mushroomScore3.setPosition((new Point(750, 10)));
+        mushroomScore2.setPosition((new Point(700, 10)));
+        mushroomScore1.setPosition((new Point(650, 10)));
+        mushroomScore0.setPosition((new Point(600, 10)));
         luigi.setPosition(new Point(600,600));
         bowser.setPosition(new Point(300,300));
+//        mushroomScore0.initializeRectangleHitbox();
         mario.initializeRectangleHitbox();
         luigi.initializeRectangleHitbox();
         bowser.initializeRectangleHitbox();
+        soundManager = new SoundManager();
+        soundManager.LoadSoundEffect("bowserCollision", "dead.wav");
+        soundManager.LoadSoundEffect("luigiCollision", "win.wav");
+        soundManager.LoadMusic("bgMusic", "game_music.wav");
+        soundManager.PlayMusic("bgMusic");
     }
 
     /**
@@ -32,16 +64,34 @@ public class LabFourGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys){
         super.update(pressedKeys);
-
+        if (this.didWin) {
+            soundManager.PlaySoundEffect("luigiCollision");
+            this.didWin = false;
+            winScreen.setVisible(false);
+        }
         visibilityBlocker--;
         if (visibilityBlocker == Integer.MAX_VALUE)
             visibilityBlocker = 10;
 
         if(mario.collidesWith(bowser))
         {
-
+            score -= 1;
+            System.out.println("removing mushroomS" + score);
+            background.removeChild("mushroomS" + (score));
+            soundManager.PlaySoundEffect("bowserCollision");
             mario.setPosition(new Point(0,0));
             mario.initializeRectangleHitbox();
+        }
+
+        if(mario.collidesWith(luigi))
+        {
+            winScreen.setVisible(true);
+            this.didWin = true;
+            //soundManager.PlaySoundEffect("luigiCollision");
+            mario.setPosition(new Point(0,0));
+            mario.initializeRectangleHitbox();
+
+
         }
 
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
@@ -139,6 +189,17 @@ public class LabFourGame extends Game {
             mario.setRotation(mario.getRotation() - 5.0f);
             mario.updateHitbox(-5.0f);
         }
+        int y = bowser.getPosition().y;
+        if (reverseMotion) {
+            bowser.setPosition(new Point(bowser.getPosition().x, y - 5));
+            if (y <= 0)
+                reverseMotion = !reverseMotion;
+        }
+        else {
+            bowser.setPosition(new Point(bowser.getPosition().x, y + 5));
+            if (y >= 800)
+                reverseMotion = !reverseMotion;
+        }
     }
     /**
      * Engine automatically invokes draw() every frame as well. If we want to make sure sun gets drawn to
@@ -149,9 +210,13 @@ public class LabFourGame extends Game {
         super.draw(g);
 
         /* Same, just check for null in case a frame gets thrown in before the sprites is initialized */
-        if(mario != null) mario.draw(g);
-        if(luigi != null) luigi.draw(g);
-        if(bowser != null) bowser.draw(g);
+          if (background != null) background.draw(g);
+//        if(mario != null) mario.draw(g);
+//        if(luigi != null) luigi.draw(g);
+//        if(bowser != null) bowser.draw(g);
+//        if(mushroomScore0 != null) mushroomScore0.draw(g);
+//        if(mushroomScore0 != null) mushroomScore0.draw(g);
+
     }
 
     /**

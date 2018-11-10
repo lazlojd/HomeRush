@@ -45,6 +45,7 @@ public class DisplayObject {
 	private Shape hitbox;
 
 
+
 	private int visibleHelper;
 
 	// Use of AffineTransform sourced from
@@ -84,6 +85,7 @@ public class DisplayObject {
 	public void initializeRectangleHitbox() {
 	    this.hitbox = new Rectangle(this.getPosition().x, this.getPosition().y,
 				this.getUnscaledWidth(), this.getUnscaledHeight());
+
 	    System.out.println(this.hitbox.getBounds());
     }
 	
@@ -320,7 +322,8 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			g2d.draw(this.hitbox);
+			if (this.hitbox != null)
+				g2d.draw(this.hitbox);
 
 
 			/*

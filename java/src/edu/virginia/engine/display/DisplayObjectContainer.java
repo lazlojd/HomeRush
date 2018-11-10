@@ -60,10 +60,13 @@ public class DisplayObjectContainer extends DisplayObject {
 
     public void removeChild(String id) {
         int len = children.size();
+        System.out.println("length: " + len);
         for (int i = 0 ; i < len; i++) {
+            System.out.println("i " + i);
             DisplayObject currentChild = children.get(i);
             if (currentChild.getId().compareTo(id) == 0) {
                 children.remove(i);
+                return;
             }
         }
     }
