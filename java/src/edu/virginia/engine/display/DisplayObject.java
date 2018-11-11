@@ -44,6 +44,9 @@ public class DisplayObject {
 	/* Lab 4 */
 	private Shape hitbox;
 
+	/* Lab 5 */
+	public Boolean hasPhysics;
+
 
 
 	private int visibleHelper;
@@ -235,6 +238,10 @@ public class DisplayObject {
 		AffineTransform ht = new AffineTransform();
 		ht.setToScale(this.getScaleX() + scale, this.getScaleY() + scale);
 		this.hitbox = ht.createTransformedShape(this.getHitbox());
+	}
+
+	public void setPhysics(Boolean hasPhysics) {
+		this.hasPhysics = hasPhysics;
 	}
 
 

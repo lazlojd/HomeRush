@@ -1,15 +1,14 @@
-package edu.virginia.lab4test;
-
-import edu.virginia.engine.display.*;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.awt.event.KeyEvent;
-
+package edu.virginia.lab5test;
 
 import edu.virginia.engine.display.Game;
+import edu.virginia.engine.display.SoundManager;
+import edu.virginia.engine.display.Sprite;
 
-public class LabFourGame extends Game {
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
+public class LabFiveGame extends Game {
     Sprite background = new Sprite("bg", "blank.png");
     Sprite mario = new Sprite("Mario", "mario.png");
     Sprite bowser = new Sprite("Bowser", "bowser.png");
@@ -27,8 +26,8 @@ public class LabFourGame extends Game {
     private boolean didWin = false;
     private String currentlyPlaying;
 
-    public LabFourGame() {
-        super("Lab Four Test Game", 900, 900);
+    public LabFiveGame() {
+        super("Lab Five Test Game", 900, 900);
         background.addChild(luigi);
         background.addChild(mario);
         background.addChild(bowser);
@@ -53,7 +52,7 @@ public class LabFourGame extends Game {
 
         luigi.setPosition(new Point(600,600));
         bowser.setPosition(new Point(300,300));
-
+//        mushroomScore0.initializeRectangleHitbox();
         mario.initializeRectangleHitbox();
         luigi.initializeRectangleHitbox();
         bowser.initializeRectangleHitbox();
@@ -63,8 +62,6 @@ public class LabFourGame extends Game {
         soundManager.LoadMusic("bgMusic", "game_music.wav");
         this.currentlyPlaying = "bgMusic";
         soundManager.PlayMusic("bgMusic");
-
-        mario.setPhysics(Boolean.TRUE);
     }
 
     /**
@@ -237,7 +234,7 @@ public class LabFourGame extends Game {
      * that calls update() and draw() every frame
      * */
     public static void main(String[] args) {
-        LabFourGame game = new LabFourGame();
+        LabFiveGame game = new LabFiveGame();
         game.start();
     }
 }
