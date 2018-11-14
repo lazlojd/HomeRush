@@ -37,12 +37,12 @@ public class DisplayObjectContainer extends DisplayObject {
          * (rotation, etc.)
          */
         Graphics2D g2d = (Graphics2D) g;
-        applyTransformations(g2d);
+        //super.applyTransformations(g2d);
         int len = children.size();
         for (int i = 0 ; i < len; i++) {
             children.get(i).draw(g);
         }
-        reverseTransformations(g2d);
+        //super.reverseTransformations(g2d);
 
 
     }

@@ -13,12 +13,12 @@ public class LabFiveGame extends Game {
     Sprite mario = new Sprite("Mario", "mario.png");
     Sprite bowser = new Sprite("Bowser", "bowser.png");
     Sprite luigi = new Sprite("Luigi", "luigi.png");
-    Sprite winScreen = new Sprite("win", "winner.jpeg");
+//    Sprite winScreen = new Sprite("win", "winner.jpeg");
     Sprite mushroomScore0 = new Sprite("mushroomS0", "mushroom.png");
-    Sprite mushroomScore1 = new Sprite("mushroomS1", "mushroom.png");
-    Sprite mushroomScore2 = new Sprite("mushroomS2", "mushroom.png");
-    Sprite mushroomScore3 = new Sprite("mushroomS3", "mushroom.png");
-    Sprite mushroomScore4 = new Sprite("mushroomS4", "mushroom.png");
+    Sprite mushroomScore1 = new Sprite("mushroomS1", "mushroom1.png");
+//    Sprite mushroomScore2 = new Sprite("mushroomS2", "mushroom.png");
+//    Sprite mushroomScore3 = new Sprite("mushroomS3", "mushroom.png");
+//    Sprite mushroomScore4 = new Sprite("mushroomS4", "mushroom.png");
     SoundManager soundManager;
     private int visibilityBlocker = 10;
     private int score = 5;
@@ -28,31 +28,32 @@ public class LabFiveGame extends Game {
 
     public LabFiveGame() {
         super("Lab Five Test Game", 900, 900);
-        background.addChild(luigi);
+        //System.out.println("mush0 pos");
         background.addChild(mario);
+        background.addChild(luigi);
         background.addChild(bowser);
         background.addChild(mushroomScore0);
         background.addChild(mushroomScore1);
-        background.addChild(mushroomScore2);
-        background.addChild(mushroomScore3);
-        background.addChild(mushroomScore4);
-        background.addChild(winScreen);
-        winScreen.setPosition(new Point(-300,300));
-        winScreen.setVisible(false);
+//        background.addChild(mushroomScore2);
+//        background.addChild(mushroomScore3);
+//        background.addChild(mushroomScore4);
+//        background.addChild(winScreen);
+//        winScreen.setPosition(new Point(-300,300));
+//        winScreen.setVisible(false);
         // The position setting below are all acting as offsets off the previous mushroom
         // very weird!
         mushroomScore0.setPosition(new Point(600, 10));
-        mushroomScore1.setPosition(new Point(50, 0));
-        mushroomScore2.setPosition(new Point(50, 0));
-        mushroomScore3.setPosition(new Point(50, 0));
-        mushroomScore4.setPosition(new Point(50, 0));
+        mushroomScore1.setPosition(new Point(650, 10));
+//        mushroomScore2.setPosition(new Point(50, 0));
+//        mushroomScore3.setPosition(new Point(50, 0));
+//        mushroomScore4.setPosition(new Point(50, 0));
 
 
 
 
-        luigi.setPosition(new Point(600,600));
+        luigi.setPosition(new Point(400,600));
         bowser.setPosition(new Point(300,300));
-//        mushroomScore0.initializeRectangleHitbox();
+        //mushroomScore0.initializeRectangleHitbox();
         mario.initializeRectangleHitbox();
         luigi.initializeRectangleHitbox();
         bowser.initializeRectangleHitbox();
@@ -74,33 +75,33 @@ public class LabFiveGame extends Game {
         if (this.didWin) {
             soundManager.PlaySoundEffect("luigiCollision");
             this.didWin = false;
-            winScreen.setVisible(false);
+            //winScreen.setVisible(false);
         }
         visibilityBlocker--;
         if (visibilityBlocker == Integer.MAX_VALUE)
             visibilityBlocker = 10;
 
-        if(mario.collidesWith(bowser) || bowser.collidesWith((mario)))
-        {
-            score -= 1;
-            System.out.println("removing mushroomS" + score);
-            background.removeChild("mushroomS" + (score));
-            soundManager.PlaySoundEffect("bowserCollision");
-            soundManager.PlayMusic(this.currentlyPlaying);
-            mario.setPosition(new Point(0,0));
-            mario.initializeRectangleHitbox();
-        }
-
-        if(mario.collidesWith(luigi))
-        {
-            winScreen.setVisible(true);
-            this.didWin = true;
-            //soundManager.PlaySoundEffect("luigiCollision");
-            mario.setPosition(new Point(0,0));
-            mario.initializeRectangleHitbox();
-
-
-        }
+//        if(mario.collidesWith(bowser) || bowser.collidesWith((mario)))
+//        {
+//            score -= 1;
+//            System.out.println("removing mushroomS" + score);
+//            //background.removeChild("mushroomS" + (score));
+//            soundManager.PlaySoundEffect("bowserCollision");
+//            soundManager.PlayMusic(this.currentlyPlaying);
+//            mario.setPosition(new Point(0,0));
+//            mario.initializeRectangleHitbox();
+//        }
+//
+//        if(mario.collidesWith(luigi))
+//        {
+//            //winScreen.setVisible(true);
+//            this.didWin = true;
+//            //soundManager.PlaySoundEffect("luigiCollision");
+//            mario.setPosition(new Point(0,0));
+//            mario.initializeRectangleHitbox();
+//
+//
+//        }
 
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
         if (mario != null) mario.update(pressedKeys);
@@ -220,12 +221,15 @@ public class LabFiveGame extends Game {
         super.draw(g);
 
         /* Same, just check for null in case a frame gets thrown in before the sprites is initialized */
+        System.out.println("----------------- calling parent draw");
           if (background != null) background.draw(g);
+        System.out.println("----------------- parent draw");
+
 //        if(mario != null) mario.draw(g);
 //        if(luigi != null) luigi.draw(g);
 //        if(bowser != null) bowser.draw(g);
 //        if(mushroomScore0 != null) mushroomScore0.draw(g);
-//        if(mushroomScore0 != null) mushroomScore0.draw(g);
+//        if(mushroomScore1 != null) mushroomScore1.draw(g);
 
     }
 

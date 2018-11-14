@@ -330,7 +330,7 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			if (this.hitbox != null)
+			//if (this.hitbox != null)
 				//g2d.draw(this.hitbox);
 
 
@@ -349,7 +349,9 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
+		System.out.println(id + " using: " + g2d.getTransform().toString());
         old = g2d.getTransform();
+
 	    g2d.translate(this.position.x, this.position.y);
 	    g2d.rotate(Math.toRadians(this.getRotation()), this.getPivotPoint().x, this.getPivotPoint().y);
 		g2d.scale(this.scaleX, this.scaleY);
@@ -358,6 +360,8 @@ public class DisplayObject {
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
+		System.out.println(id + " new: " + g2d.getTransform().toString());
+		//old.concatenate(g2d.getTransform());
 	}
 
 	/**
@@ -365,7 +369,16 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
-	    g2d.setTransform(old);
+		System.out.println(id + " setting old: " + g2d.getTransform().toString());
+		g2d.setTransform(old);
+//		try {
+//			AffineTransform recent = g2d.getTransform();
+//			recent.invert();
+//			g2d.setTransform(recent);
+//		} catch (Exception e) {
+//			System.err.println(e);
+//		}
+
 	}
 
 }
