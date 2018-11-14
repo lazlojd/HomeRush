@@ -90,7 +90,7 @@ public class DisplayObject {
 	    this.hitbox = new Rectangle(this.getPosition().x, this.getPosition().y,
 				this.getUnscaledWidth(), this.getUnscaledHeight());
 
-	    System.out.println(this.hitbox.getBounds());
+	    //System.out.println(this.hitbox.getBounds());
     }
 	
 	public Boolean getVisible() {
@@ -212,10 +212,11 @@ public class DisplayObject {
 
 
 	public boolean collidesWith(DisplayObject other) {
-	    Area thisHitbox = new Area(this.hitbox);
-	    Area otherHitbox = new Area(other.hitbox);
-	    thisHitbox.intersect(otherHitbox);
-	    return !thisHitbox.isEmpty();
+//	    Area thisHitbox = new Area(this.hitbox);
+//	    Area otherHitbox = new Area(other.hitbox);
+//	    thisHitbox.intersect(otherHitbox);
+//	    return !thisHitbox.isEmpty();
+        return this.hitbox.getBounds().intersects(other.hitbox.getBounds());
 	}
 
 	//Translation
@@ -223,7 +224,7 @@ public class DisplayObject {
 		AffineTransform ht = new AffineTransform();
 		ht.setToTranslation(translateX, translateY);
 		this.hitbox = ht.createTransformedShape(this.getHitbox());
-		System.out.println(this.hitbox.getBounds());
+		//System.out.println(this.hitbox.getBounds());
 	}
 
 	//Rotation
@@ -236,13 +237,17 @@ public class DisplayObject {
 	//Scaling
 	public void updateHitbox(double scale) {
 		AffineTransform ht = new AffineTransform();
-		ht.setToScale(this.getScaleX() + scale, this.getScaleY() + scale);
+		ht.scale(this.getScaleX() + scale, this.getScaleY() + scale);
 		this.hitbox = ht.createTransformedShape(this.getHitbox());
 	}
 
 	public void setPhysics(Boolean hasPhysics) {
 		this.hasPhysics = hasPhysics;
 	}
+
+	public boolean getPhysics() {
+	    return this.hasPhysics;
+    }
 
 
 
@@ -330,8 +335,8 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			//if (this.hitbox != null)
-				//g2d.draw(this.hitbox);
+			if (this.hitbox != null)
+				g2d.draw(this.hitbox);
 
 
 			/*
@@ -349,7 +354,7 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void applyTransformations(Graphics2D g2d) {
-		System.out.println(id + " using: " + g2d.getTransform().toString());
+		//System.out.println(id + " using: " + g2d.getTransform().toString());
         old = g2d.getTransform();
 
 	    g2d.translate(this.position.x, this.position.y);
@@ -360,7 +365,7 @@ public class DisplayObject {
 				g2d.getComposite()).getAlpha();
 		g2d.setComposite(AlphaComposite.getInstance(3, curAlpha *
 				this.alpha));
-		System.out.println(id + " new: " + g2d.getTransform().toString());
+		//System.out.println(id + " new: " + g2d.getTransform().toString());
 		//old.concatenate(g2d.getTransform());
 	}
 
@@ -369,7 +374,7 @@ public class DisplayObject {
 	 * object
 	 * */
 	protected void reverseTransformations(Graphics2D g2d){
-		System.out.println(id + " setting old: " + g2d.getTransform().toString());
+		//System.out.println(id + " setting old: " + g2d.getTransform().toString());
 		g2d.setTransform(old);
 //		try {
 //			AffineTransform recent = g2d.getTransform();
