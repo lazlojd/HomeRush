@@ -116,11 +116,10 @@ public class LabFiveGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
-        if (mario.getLock() != 0) {
-            mario.setLock(mario.getLock() - 1);
-            return;
-
-        }
+//        if (mario.getLock() != 0) {
+//            mario.setLock(mario.getLock() - 1);
+//            return;
+//        }
         if (this.didWin) {
             soundManager.PlaySoundEffect("luigiCollision");
             this.didWin = false;
@@ -152,8 +151,9 @@ public class LabFiveGame extends Game {
 
         if (mario.collidesWith(spike) || spike.collidesWith(mario)) {
             if (spike.getBounciness())
-                mario.bounce();
+                mario.setBounciness(true);
         }
+        mario.bounce();
 
         if (mario.collidesWith(luigi)) {
             winScreen.setVisible(true);
@@ -256,8 +256,10 @@ public class LabFiveGame extends Game {
             mario.updateHitbox(-5, 0);
         }
         if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
-            mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
-            mario.updateHitbox(5, 0);
+            if (!mario.getBounciness()) {
+                mario.setPosition(new Point(mario.getPosition().x + 5, mario.getPosition().y));
+                mario.updateHitbox(5, 0);
+            }
         }
 
         /* I,J,K,L Pivot Point */
