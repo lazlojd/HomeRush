@@ -20,16 +20,28 @@ public class LabFiveGame extends Game {
     Sprite mushroomScore1 = new Sprite("mushroomS1", "mushroom1.png");
     Sprite mushroomScore2 = new Sprite("mushroomS2", "mushroom.png");
     Sprite mushroomScore3 = new Sprite("mushroomS3", "mushroom.png");
-    Sprite mushroomScore4 = new Sprite("mushroomS4", "mushroom.png");
+    Sprite spike = new Sprite("spike", "spike.png");
+    //Sprite spike = new Sprite("spike", "spike.png");
     SoundManager soundManager;
     private int visibilityBlocker = 10;
-    private int score = 5;
+    private int score = 4;
     private boolean reverseMotion = false;
     private boolean didWin = false;
     private boolean isJumping = false;
     private int jumpingSpeed = 20;
     private int endingSpeed = -10;
+
+    // bounce after jump
+    private boolean isBouncingAfterJump = false;
+    private int numBounced = 1;
+    private int currentJumpingSpeed = 20;
     private String currentlyPlaying;
+    private boolean doneBouncing = false;
+    private final int GROUNDPOINT = 675;
+    private final int INITIALJUMPINGSPEED = 20;
+    private final int BOUNCOEFFICIENT = 3;
+    private final int INITIALNUMBOUNCE = 1;
+    private final int NUMTIMESTOBOUNCE = 3;
 
     public LabFiveGame() {
         super("Lab Five Test Game", 900, 900);
@@ -41,10 +53,12 @@ public class LabFiveGame extends Game {
         background.addChild(mushroomScore1);
         background.addChild(mushroomScore2);
         background.addChild(mushroomScore3);
-        background.addChild(mushroomScore4);
+        background.addChild(spike);
         background.addChild(ground1);
         background.addChild(ground2);
         background.addChild(winScreen);
+        background.addChild(spike);
+
         winScreen.setPosition(new Point(500, 500));
         winScreen.setVisible(false);
         // The position setting below are all acting as offsets off the previous mushroom
@@ -53,7 +67,7 @@ public class LabFiveGame extends Game {
         mushroomScore1.setPosition(new Point(650, 10));
         mushroomScore2.setPosition(new Point(700, 10));
         mushroomScore3.setPosition(new Point(750, 10));
-        mushroomScore4.setPosition(new Point(800, 10));
+        spike.setPosition(new Point(200, 650));
 
         ground1.setPosition(new Point(0, 815));
         ground2.setPosition(new Point(550, 815));
@@ -68,6 +82,7 @@ public class LabFiveGame extends Game {
         bowser.initializeRectangleHitbox();
         ground1.initializeRectangleHitbox();
         ground2.initializeRectangleHitbox();
+        spike.initializeRectangleHitbox();
         soundManager = new SoundManager();
         soundManager.LoadSoundEffect("bowserCollision", "dead.wav");
         soundManager.LoadSoundEffect("luigiCollision", "win.wav");
@@ -76,6 +91,22 @@ public class LabFiveGame extends Game {
         soundManager.PlayMusic("bgMusic");
 
         mario.setPhysics(true);
+        spike.setBounciness(true);
+    }
+
+    private void handleBounce() {
+        if (isBouncingAfterJump) {
+            //System.out.println("numtimes to bound: " + NUMTIMESTOBOUNCE + " --num bounce: " + this.numBounced);
+            if (!this.isJumping && this.numBounced <= NUMTIMESTOBOUNCE) {
+                this.currentJumpingSpeed = INITIALJUMPINGSPEED - (this.numBounced * BOUNCOEFFICIENT);
+                this.numBounced += 1;
+                this.isJumping = true;
+            } else if (this.numBounced > NUMTIMESTOBOUNCE) {
+                this.numBounced = this.INITIALNUMBOUNCE;
+                this.isBouncingAfterJump = false;
+                this.doneBouncing = true;
+            }
+        }
     }
 
     /**
@@ -85,6 +116,11 @@ public class LabFiveGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
+        if (mario.getLock() != 0) {
+            mario.setLock(mario.getLock() - 1);
+            return;
+
+        }
         if (this.didWin) {
             soundManager.PlaySoundEffect("luigiCollision");
             this.didWin = false;
@@ -114,6 +150,11 @@ public class LabFiveGame extends Game {
             bowser.initializeRectangleHitbox();
         }
 
+        if (mario.collidesWith(spike) || spike.collidesWith(mario)) {
+            if (spike.getBounciness())
+                mario.bounce();
+        }
+
         if (mario.collidesWith(luigi)) {
             winScreen.setVisible(true);
             this.didWin = true;
@@ -124,17 +165,25 @@ public class LabFiveGame extends Game {
 
         /* Jumping physics */
         if (isJumping) {
-            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - jumpingSpeed));
-            mario.updateHitbox(0, -jumpingSpeed);
-            if (jumpingSpeed > endingSpeed) {
-                jumpingSpeed -= 1;
+            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y - currentJumpingSpeed));
+            mario.updateHitbox(0, -currentJumpingSpeed);
+            if (currentJumpingSpeed > endingSpeed) {
+                currentJumpingSpeed -= 1;
             }
-            if (mario.getPosition().y > 675) {
+            if (mario.getPosition().y > GROUNDPOINT) {
                 mario.setPosition(new Point(mario.getPosition().x, 675));
-                jumpingSpeed = 20;
+                if (!this.doneBouncing)
+                    this.isBouncingAfterJump = true;
+                else
+                    this.doneBouncing = false;
+
+
+                currentJumpingSpeed = INITIALJUMPINGSPEED;
                 isJumping = false;
             }
         }
+
+        this.handleBounce();
 
         /* Make sure mario is not null. Sometimes Swing can auto cause an extra frame to go before everything is initialized */
         if (mario != null) mario.update(pressedKeys);

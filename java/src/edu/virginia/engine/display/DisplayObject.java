@@ -46,7 +46,10 @@ public class DisplayObject {
 
 	/* Lab 5 */
 	public Boolean hasPhysics;
-
+	private Boolean hasBounciness;
+	private int lastX;
+	private int lastY;
+	private int lock;
 
 
 	private int visibleHelper;
@@ -83,6 +86,8 @@ public class DisplayObject {
         this.scaleX = 1.0;
         this.scaleY = 1.0;
         this.visibleHelper = 1;
+        this.hasBounciness = false;
+        this.lock = 0;
 
 	}
 
@@ -92,6 +97,10 @@ public class DisplayObject {
 
 	    //System.out.println(this.hitbox.getBounds());
     }
+
+    public boolean getBounciness() {
+		return this.hasBounciness;
+	}
 	
 	public Boolean getVisible() {
 		return this.visible;
@@ -111,6 +120,10 @@ public class DisplayObject {
 
 	public Double getScaleY() {
 		return scaleY;
+	}
+
+	public void setBounciness(boolean value) {
+		this.hasBounciness = value;
 	}
 
 	public void setVisible(Boolean visible) {
@@ -156,6 +169,10 @@ public class DisplayObject {
 	    return rotation;
 	}
 
+	public int getLock() {return lock;}
+
+	public void setLock(int lock) {this.lock = lock;}
+
 	public void setPosition(Point position) {
 	    this.position = position;
 	}
@@ -168,6 +185,29 @@ public class DisplayObject {
 	    this.rotation = rotation;
 	}
 
+
+
+
+	public void bounce() {
+		int currentX = this.getPosition().x;
+		int currentY = this.getPosition().y;
+		if (this.lastX < currentX) {
+			int difference = (currentX - lastX);
+			this.setPosition(new Point(currentX - difference, currentY));
+			this.updateHitbox(-5, currentY);
+		}
+		else {
+			int difference = lastX - currentX;
+			this.setPosition(new Point(lastX - difference, currentY));
+			this.updateHitbox(5, currentY);
+		}
+
+		this.lock = 10;
+//		if (this.lastY < currentY)
+//			this.setPosition(new Point(newX, currentY - (currentY - lastY)));
+//		else
+//			this.setPosition(new Point (newX, lastY - (lastY - currentY)));
+	}
 	/**
 	 * Convert local points to global points and global points to local points.
 	 * */
