@@ -253,12 +253,11 @@ public class LabFiveGame extends Game {
                 mario.updateHitbox(0, -5);
             }
         }
-        // No down movement in this iteration due to gravity
-//        if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-//
-//            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
-//            mario.updateHitbox(0, 5);
-//        }
+
+        if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
+            mario.updateHitbox(0, 5);
+        }
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
             mario.updateHitbox(-5, 0);
@@ -325,17 +324,10 @@ public class LabFiveGame extends Game {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-
         /* Same, just check for null in case a frame gets thrown in before the sprites is initialized */
         //System.out.println("----------------- calling parent draw");
         if (background != null) background.draw(g);
         //System.out.println("----------------- parent draw");
-
-//        if(mario != null) mario.draw(g);
-//        if(luigi != null) luigi.draw(g);
-//        if(bowser != null) bowser.draw(g);
-//        if(mushroomScore0 != null) mushroomScore0.draw(g);
-//        if(mushroomScore1 != null) mushroomScore1.draw(g);
 
     }
 
