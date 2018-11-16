@@ -67,14 +67,14 @@ public class LabFiveGame extends Game {
         mushroomScore1.setPosition(new Point(650, 10));
         mushroomScore2.setPosition(new Point(700, 10));
         mushroomScore3.setPosition(new Point(750, 10));
-        spike.setPosition(new Point(200, 650));
+        spike.setPosition(new Point(300, 450));
         spike.setPivotPoint(new Point(350, 200));
         ground1.setPosition(new Point(0, 815));
         ground2.setPosition(new Point(550, 815));
 
 
         mario.setPosition(new Point(0, 675));
-        luigi.setPosition(new Point(600, 600));
+        luigi.setPosition(new Point(750, 600));
         bowser.setPosition(new Point(350, 300));
         //mushroomScore0.initializeRectangleHitbox();
         mario.initializeRectangleHitbox();
@@ -116,10 +116,8 @@ public class LabFiveGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
-//        if (mario.getLock() != 0) {
-//            mario.setLock(mario.getLock() - 1);
-//            return;
-//        }
+//
+
         if (this.didWin) {
             soundManager.PlaySoundEffect("luigiCollision");
             this.didWin = false;
@@ -128,13 +126,21 @@ public class LabFiveGame extends Game {
         visibilityBlocker--;
         if (visibilityBlocker == Integer.MAX_VALUE)
             visibilityBlocker = 10;
+        int marioX = mario.getPosition().x;
 
+        if (marioX > (ground1.getPosition().x + 300)  && marioX < ground2.getPosition().x && !isJumping) {
+            mario.setPosition(new Point(marioX, mario.getPosition().y + 5));
+            mario.updateHitbox(0, 5);
+            mario.setFalling(true);
+        }
         /* Collision handling */
         if (mario.collidesWith(ground1) || mario.collidesWith(ground2)) {
             mario.setPosition(new Point(mario.getPosition().x, 675));
+
         }
 
-        if (mario.collidesWith(bowser) || bowser.collidesWith((mario))) {
+
+        if (mario.collidesWith(bowser) || bowser.collidesWith((mario)) || mario.getPosition().y > 900) {
             score -= 1;
             //System.out.println("removing mushroomS" + score);
             background.removeChild("mushroomS" + (score));
@@ -171,7 +177,7 @@ public class LabFiveGame extends Game {
                 currentJumpingSpeed -= 1;
             }
             if (mario.getPosition().y > GROUNDPOINT) {
-                mario.setPosition(new Point(mario.getPosition().x, 675));
+                mario.setPosition(new Point(mario.getPosition().x, GROUNDPOINT));
                 if (!this.doneBouncing)
                     this.isBouncingAfterJump = true;
                 else
@@ -239,7 +245,7 @@ public class LabFiveGame extends Game {
         }
 
         /* Up, down, left, right */
-        if (pressedKeys.contains(KeyEvent.VK_UP)) {
+        if (pressedKeys.contains(KeyEvent.VK_UP) && !mario.getFalling()) {
             if (mario.getPhysics()) {
                 isJumping = true;
             } else {
@@ -247,10 +253,12 @@ public class LabFiveGame extends Game {
                 mario.updateHitbox(0, -5);
             }
         }
-        if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
-            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
-            mario.updateHitbox(0, 5);
-        }
+        // No down movement in this iteration due to gravity
+//        if (pressedKeys.contains(KeyEvent.VK_DOWN)) {
+//
+//            mario.setPosition(new Point(mario.getPosition().x, mario.getPosition().y + 5));
+//            mario.updateHitbox(0, 5);
+//        }
         if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
             mario.setPosition(new Point(mario.getPosition().x - 5, mario.getPosition().y));
             mario.updateHitbox(-5, 0);

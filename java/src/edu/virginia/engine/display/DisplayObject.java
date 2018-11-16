@@ -51,7 +51,7 @@ public class DisplayObject {
 	private int lastY;
 	private int bounceSpeed;
 	private final int INITIALBOUNCESPEED = 5;
-
+	private boolean isFalling;
 
 	private int visibleHelper;
 
@@ -89,6 +89,7 @@ public class DisplayObject {
         this.visibleHelper = 1;
         this.hasBounciness = false;
         this.bounceSpeed = 5;
+        this.isFalling = false;
 
 
 	}
@@ -128,6 +129,9 @@ public class DisplayObject {
 		this.hasBounciness = value;
 	}
 
+	public boolean getFalling() {
+		return this.isFalling;
+	}
 	public void setVisible(Boolean visible) {
 		this.visible = visible;
 		if (visible) {
@@ -135,6 +139,9 @@ public class DisplayObject {
         } else {
 		    this.setAlpha(0.0f);
         }
+	}
+	public void setFalling(boolean value) {
+		this.isFalling = value;
 	}
 
 	public void setAlpha(Float alpha) {
