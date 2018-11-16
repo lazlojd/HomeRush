@@ -68,7 +68,7 @@ public class LabFiveGame extends Game {
         mushroomScore2.setPosition(new Point(700, 10));
         mushroomScore3.setPosition(new Point(750, 10));
         spike.setPosition(new Point(200, 650));
-
+        spike.setPivotPoint(new Point(350, 200));
         ground1.setPosition(new Point(0, 815));
         ground2.setPosition(new Point(550, 815));
 
@@ -286,17 +286,24 @@ public class LabFiveGame extends Game {
             mario.updateHitbox(-5.0f);
         }
         int y = bowser.getPosition().y;
+        int spikeX = spike.getPosition().x;
+        int spikeY = spike.getPosition().y;
         if (reverseMotion) {
+            spike.setPosition(new Point(spikeX + 2, spikeY - 5));
+            spike.updateHitbox(2, -5);
             bowser.setPosition(new Point(bowser.getPosition().x, y - 5));
             bowser.updateHitbox(0, -5);
             if (y <= 0)
                 reverseMotion = !reverseMotion;
         } else {
+            spike.setPosition(new Point(spikeX - 2, spikeY + 5));
+            spike.updateHitbox(-2, 5);
             bowser.setPosition(new Point(bowser.getPosition().x, y + 5));
             bowser.updateHitbox(0, 5);
             if (y >= 800)
                 reverseMotion = !reverseMotion;
         }
+
 
 
     }
