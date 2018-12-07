@@ -8,7 +8,6 @@ import java.awt.Point;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.Sprite;
 
-
 /**
  * Example game that utilizes our engine. We can create a simple prototype game with just a couple lines of code
  * although, for now, it won't be a very fun game :)
@@ -44,7 +43,7 @@ public class LabOneGame extends Game{
 
 
 		if (pressedKeys.contains(KeyEvent.VK_V)) {
-			/* visibilityBlocker only allows visbility to change once every 10 iterations of the loop
+			/* visibilityBlocker only allows visibility to change once every 10 iterations of the loop
 			 * This prevents V key events that last more than one iteration from producing
 			 * no effect on the sprite
 			 */
