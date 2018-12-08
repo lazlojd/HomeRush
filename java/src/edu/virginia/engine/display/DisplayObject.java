@@ -246,8 +246,11 @@ public class DisplayObject {
 		double[] gravityOffset = getGravityOffset(obstacle);
 		System.out.println("gravity offset: "+ gravityOffset[0] + " -- " + gravityOffset[1]);
 		System.out.println("v + g: " + (currentXVelocity + gravityOffset[0]) + " -- " + (currentYVelocity + gravityOffset[1]));
-		currentXVelocity = (currentXVelocity + gravityOffset[0] < TERMINALVELOCITY) ? currentXVelocity + gravityOffset[0] : currentXVelocity;
-		currentYVelocity = (currentYVelocity + gravityOffset[1] < TERMINALVELOCITY) ? currentYVelocity + gravityOffset[1] : currentYVelocity;
+		Double sumX = currentXVelocity + gravityOffset[0];
+		Double sumY = currentYVelocity + gravityOffset[1];
+
+		currentXVelocity = (sumX < TERMINALVELOCITY) && (sumX > (TERMINALVELOCITY * -1)) ? currentXVelocity + gravityOffset[0] : currentXVelocity;
+		currentYVelocity = (sumY < TERMINALVELOCITY) && (sumY > (TERMINALVELOCITY * -1)) ? currentYVelocity + gravityOffset[1] : currentYVelocity;
 
 		Point current = this.getPosition();
 		System.out.println("position: " + current);
