@@ -215,9 +215,13 @@ public class DisplayObject {
 	    this.rotation = rotation;
 	}
 
+	public void resetVelocity() {
+		this.currentXVelocity = INITIALVELOCITY;
+		this.currentYVelocity = INITIALVELOCITY;
+	}
+
 	public void launch() {
 		// Given rotation angle, get x and y velocity components
-
 		this.currentXVelocity = Math.sin(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
 		this.currentYVelocity = Math.cos(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
 		System.out.println("setting points: " + this.currentXVelocity + " -- " + this.currentYVelocity);
