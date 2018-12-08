@@ -61,7 +61,7 @@ public class DisplayObject {
 	private Point center;
 
 	/* Spaceship variables */
-	final private double INITIALVELOCITY = 1;
+	final private double INITIALVELOCITY = 2;
 	final private int TERMINALVELOCITY = 20;
 	private double currentXVelocity;
 	private double currentYVelocity;
@@ -215,24 +215,42 @@ public class DisplayObject {
 	    this.rotation = rotation;
 	}
 
+	public void launch() {
+		// Given rotation angle, get x and y velocity components
+
+		this.currentXVelocity = Math.sin(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
+		this.currentYVelocity = Math.cos(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
+		System.out.println("setting points: " + this.currentXVelocity + " -- " + this.currentYVelocity);
+	}
+
+	public void updatePosition() {
+		Point current = this.getPosition();
+		int x = (int)(currentXVelocity);
+		int y = (int)(currentYVelocity);
+		this.setPosition(new Point(current.x + x, current.y - y));
+	}
+
 	/* These methods are only ever called from the spaceships perspective
 	* Obstacle is the object causing a gravity offset on ship
 	*/
-	public void updatePosition(DisplayObject obstacle) {
+
+
+	public void updatePositionWithGravity(DisplayObject obstacle) {
 		System.out.println("---------------");
+
 		System.out.println("velocitoes: " + currentXVelocity + " -- " + currentYVelocity);
 		double[] gravityOffset = getGravityOffset(obstacle);
 		System.out.println("gravity offset: "+ gravityOffset[0] + " -- " + gravityOffset[1]);
 		System.out.println("v + g: " + (currentXVelocity + gravityOffset[0]) + " -- " + (currentYVelocity + gravityOffset[1]));
 		currentXVelocity = (currentXVelocity + gravityOffset[0] < TERMINALVELOCITY) ? currentXVelocity + gravityOffset[0] : currentXVelocity;
 		currentYVelocity = (currentYVelocity + gravityOffset[1] < TERMINALVELOCITY) ? currentYVelocity + gravityOffset[1] : currentYVelocity;
-//		currentXVelocity = currentXVelocity + gravityOffset[0];
-//		currentYVelocity = currentYVelocity + gravityOffset[1];
+
 		Point current = this.getPosition();
 		System.out.println("position: " + current);
 		int x = (int)(currentXVelocity);
 		int y = (int)(currentYVelocity);
 		System.out.println("setting points: " + x + " -- " + y);
+
 		this.setPosition(new Point(current.x + x, current.y - y));
 		System.out.println("---------------");
 	}
@@ -243,19 +261,25 @@ public class DisplayObject {
 		System.out.println("masses " + obstacleMass + " -- " + this.mass);
 		Point obstaclePosition = obstacle.getCenter();
 		Point thisPosition = this.getPosition();
+
 		double distance = getDistance(thisPosition, obstaclePosition);
 		System.out.println("distance: " + distance);
+
 		double force = getForceDueToGravity(this.getMass(), obstacleMass, distance);
 		System.out.println("gForce: " + force);
+
 		double acceleration = force / this.mass;
 		System.out.println("acceleration: " + acceleration);
+
 		double angleBetween = getAngle(thisPosition, obstaclePosition);
 		System.out.println("angle: " + angleBetween);
+
 		double scale = Math.pow(10, 4);
 		double  accelerationX = Math.cos(angleBetween) * acceleration * scale;
 		accelerationX = (thisPosition.x > obstaclePosition.x) ? accelerationX * -1 : accelerationX;
 		double accelerationY = Math.sin(angleBetween) * acceleration * scale;
 		accelerationY = (thisPosition.y < obstaclePosition.y) ? accelerationY * -1 : accelerationY;
+
 		System.out.println("acc components: " + accelerationX + " -- " + accelerationY);
 		return new double[]{accelerationX, accelerationY};
 

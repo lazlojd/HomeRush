@@ -94,8 +94,7 @@ public class LabFourGame extends Game {
             mario.initializeRectangleHitbox();
         }
 
-        if(mario.collidesWith(luigi))
-        {
+        if(mario.collidesWith(luigi)) {
             winScreen.setVisible(true);
             this.didWin = true;
             //soundManager.PlaySoundEffect("luigiCollision");

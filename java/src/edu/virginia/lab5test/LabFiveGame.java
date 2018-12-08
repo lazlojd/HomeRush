@@ -14,6 +14,8 @@ public class LabFiveGame extends Game {
     Sprite planetOne;
     Sprite sun;
     Sprite spaceShip;
+    boolean launched;
+    int justRotated = 10;
 
     private void initSprites() {
         levelOne = new Sprite("backgroundLevelOne", "spaceBackground.jpg");
@@ -27,10 +29,14 @@ public class LabFiveGame extends Game {
         // Set spaceship at bottom left corner
         spaceShip.setPosition(new Point(150,800));
         spaceShip.setMass(1);
-        // Center planet vertically and place on right side of screen
-        planetOne.setPosition(new Point(100, 400));
+        Point pos = spaceShip.getPosition();
+        // Set pivot point to be center of spaceship
+        spaceShip.setPivotPoint(new Point(30, 26));
+        /*NOTE: position of planet will not govern what spaceship is attracted to. The
+        * CENTER of the planet does*/
+        planetOne.setPosition(new Point(600, 400));
         // We want spaceship to gravitate toward center of planet, not upper left corner
-        planetOne.setCenter(new Point(150, 350));
+        planetOne.setCenter(new Point(650, 350));
         planetOne.setMass(10);
         // Center sun horizontally and place on left side of screen
         sun.setPosition(new Point(200, 400));
@@ -38,6 +44,8 @@ public class LabFiveGame extends Game {
         levelOne.addChild(spaceShip);
         levelOne.addChild(planetOne);
         //levelOne.addChild(sun);
+
+        launched = false;
     }
 
     public LabFiveGame() {
@@ -58,8 +66,35 @@ public class LabFiveGame extends Game {
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
 
-        // This applies gravitational affects from planet one to spaceship one
-        spaceShip.updatePosition(planetOne);
+        if (!launched) {
+            /* right to rotate Spaceship right */
+            if (justRotated == 0) {
+                if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+                    spaceShip.setRotation(spaceShip.getRotation() + 45.0f);
+                    justRotated = 10;
+                }
+                /* left to rotate Spaceship left */
+                if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+                    spaceShip.setRotation(spaceShip.getRotation() - 45.0f);
+                    justRotated = 10;
+                }
+            } else {
+                // wait 10 frames before accepting another user input
+                justRotated -= 1;
+            }
+            // space to launch
+            if (pressedKeys.contains(KeyEvent.VK_SPACE)) {
+                spaceShip.launch();
+                launched = true;
+            }
+            System.out.println(spaceShip.getRotation());
+        } else {
+            // This applies gravitational affects from planet one to spaceship one
+            //spaceShip.updatePositionWithGravity(planetOne);
+
+            spaceShip.updatePosition();
+        }
+
 
 
 
