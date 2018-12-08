@@ -15,6 +15,7 @@ public class LabFiveGame extends Game {
     Sprite sun;
     Sprite spaceShip;
     Sprite whiteTrajectoryDot;
+    Sprite target;
     boolean launched;
     int justRotated = 10;
     int whiteDotTimer = 50;
@@ -25,6 +26,7 @@ public class LabFiveGame extends Game {
         sun = new Sprite("sun", "sun.png");
         spaceShip = new Sprite("spaceship", "spaceship.png");
         whiteTrajectoryDot = new Sprite("whiteDot", "whiteDot.png");
+        target = new Sprite("target", "target.png");
 
     }
 
@@ -39,19 +41,22 @@ public class LabFiveGame extends Game {
         resetWhiteDot();
         /*NOTE: position of planet will not govern what spaceship is attracted to. The
         * CENTER of the planet does*/
-        planetOne.setPosition(new Point(600, 400));
+        planetOne.setPosition(new Point(600, 750));
         // We want spaceship to gravitate toward center of planet, not upper left corner
-        planetOne.setCenter(new Point(650, 450));
-        planetOne.setMass(10);
+        planetOne.setCenter(new Point(planetOne.getPosition().x - 50, planetOne.getPosition().y - 50));
+        planetOne.setMass(5);
         // Center sun horizontally and place on left side of screen
-        sun.setPosition(new Point(200, 400));
-        sun.setMass(11);
-        sun.setCenter(new Point(250, 450));
+        sun.setPosition(new Point(100, 200));
+        sun.setMass(10);
+        sun.setCenter(new Point(sun.getPosition().x - 50, sun.getPosition().y - 50));
 
+        target.setPosition(new Point(700, 10));
+
+        levelOne.addChild(target);
         levelOne.addChild(spaceShip);
         levelOne.addChild(whiteTrajectoryDot);
         levelOne.addChild(planetOne);
-        //levelOne.addChild(sun);
+        levelOne.addChild(sun);
 
         launched = false;
     }
@@ -60,8 +65,10 @@ public class LabFiveGame extends Game {
         whiteTrajectoryDot.setPosition(new Point(spaceShip.getPosition().x, spaceShip.getPosition().y));
         whiteTrajectoryDot.setMass(1);
         whiteTrajectoryDot.setPivotPoint(new Point(spaceShip.getPivotPoint().x, spaceShip.getPivotPoint().y));
+        whiteTrajectoryDot.setRotation(spaceShip.getRotation());
         whiteTrajectoryDot.resetVelocity();
-        whiteDotTimer = 50;
+        whiteTrajectoryDot.launch();
+        whiteDotTimer = 100;
     }
 
     public LabFiveGame() {
@@ -121,6 +128,7 @@ public class LabFiveGame extends Game {
             // White trajectory dot control
             if (whiteDotTimer != 0) {
                 whiteTrajectoryDot.updatePositionWithGravity(planetOne);
+                whiteTrajectoryDot.updatePositionWithGravity(sun);
                 whiteDotTimer -= 1;
             } else
                 resetWhiteDot();
@@ -129,7 +137,7 @@ public class LabFiveGame extends Game {
         } else {
             // This applies gravitational affects from planet one to spaceship one
             spaceShip.updatePositionWithGravity(planetOne);
-            //spaceShip.updatePositionWithGravity(sun);
+            spaceShip.updatePositionWithGravity(sun);
             //spaceShip.updatePosition();
         }
 
