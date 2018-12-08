@@ -61,7 +61,7 @@ public class DisplayObject {
 	private Point center;
 
 	/* Spaceship variables */
-	final private double INITIALVELOCITY = 2;
+	final private double INITIALVELOCITY = 12;
 	final private int TERMINALVELOCITY = 20;
 	private double currentXVelocity;
 	private double currentYVelocity;

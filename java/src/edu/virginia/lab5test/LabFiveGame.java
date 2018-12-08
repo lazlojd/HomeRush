@@ -36,10 +36,12 @@ public class LabFiveGame extends Game {
         * CENTER of the planet does*/
         planetOne.setPosition(new Point(600, 400));
         // We want spaceship to gravitate toward center of planet, not upper left corner
-        planetOne.setCenter(new Point(650, 350));
+        planetOne.setCenter(new Point(650, 450));
         planetOne.setMass(10);
         // Center sun horizontally and place on left side of screen
         sun.setPosition(new Point(200, 400));
+        sun.setMass(11);
+        sun.setCenter(new Point(250, 450));
 
         levelOne.addChild(spaceShip);
         levelOne.addChild(planetOne);
@@ -67,14 +69,25 @@ public class LabFiveGame extends Game {
         super.update(pressedKeys);
 
         if (!launched) {
-            /* right to rotate Spaceship right */
+
             if (justRotated == 0) {
+                /* left to move Spaceship position left */
                 if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
+                    spaceShip.setPosition(new Point(spaceShip.getPosition().x + 10, spaceShip.getPosition().y));
+                    justRotated = 2;
+                }
+                /* left to move Spaceship position left */
+                if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+                    spaceShip.setPosition(new Point(spaceShip.getPosition().x - 10, spaceShip.getPosition().y));
+                    justRotated = 2;
+                }
+                /* Q to rotate Spaceship right */
+                if (pressedKeys.contains(KeyEvent.VK_W)) {
                     spaceShip.setRotation(spaceShip.getRotation() + 45.0f);
                     justRotated = 10;
                 }
-                /* left to rotate Spaceship left */
-                if (pressedKeys.contains(KeyEvent.VK_LEFT)) {
+                /* W to rotate Spaceship right */
+                if (pressedKeys.contains(KeyEvent.VK_Q)) {
                     spaceShip.setRotation(spaceShip.getRotation() - 45.0f);
                     justRotated = 10;
                 }
@@ -90,9 +103,9 @@ public class LabFiveGame extends Game {
             System.out.println(spaceShip.getRotation());
         } else {
             // This applies gravitational affects from planet one to spaceship one
-            //spaceShip.updatePositionWithGravity(planetOne);
-
-            spaceShip.updatePosition();
+            spaceShip.updatePositionWithGravity(planetOne);
+            //spaceShip.updatePositionWithGravity(sun);
+            //spaceShip.updatePosition();
         }
 
 
