@@ -126,11 +126,15 @@ public class DisplayObject {
     public void initializeCollisionHitbox() {
 		this.hitbox = new Ellipse2D.Double(this.getPosition().x, this.getPosition().y,
 				this.getUnscaledWidth(), this.getUnscaledHeight());
+		System.out.print(this.id);
+		System.out.println(this.hitbox.getBounds2D().toString());
 		}
 
 	public void initializeGravityHitbox() {
 		this.gravityHitbox = new Ellipse2D.Double(this.getPosition().x - this.getUnscaledWidth()/2.0, this.getPosition().y - this.getUnscaledWidth()/2.0,
 				this.getUnscaledWidth() * 2, this.getUnscaledHeight() * 2);
+		System.out.print(this.id);
+		System.out.println(this.gravityHitbox.getBounds2D().toString());
 	}
 
 	public boolean getBounciness() {
@@ -245,7 +249,7 @@ public class DisplayObject {
 		// Given rotation angle, get x and y velocity components
 		this.currentXVelocity = Math.sin(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
 		this.currentYVelocity = Math.cos(Math.toRadians(this.getRotation())) * INITIALVELOCITY;
-		System.out.println("setting points: " + this.currentXVelocity + " -- " + this.currentYVelocity);
+		//System.out.println("setting points: " + this.currentXVelocity + " -- " + this.currentYVelocity);
 	}
 
 	public void updatePosition() {
@@ -261,12 +265,12 @@ public class DisplayObject {
 
 
 	public void updatePositionWithGravity(DisplayObject obstacle) {
-		System.out.println("---------------");
+		//System.out.println("---------------");
 
-		System.out.println("velocitoes: " + currentXVelocity + " -- " + currentYVelocity);
+		//System.out.println("velocities: " + currentXVelocity + " -- " + currentYVelocity);
 		double[] gravityOffset = getGravityOffset(obstacle);
-		System.out.println("gravity offset: "+ gravityOffset[0] + " -- " + gravityOffset[1]);
-		System.out.println("v + g: " + (currentXVelocity + gravityOffset[0]) + " -- " + (currentYVelocity + gravityOffset[1]));
+		//System.out.println("gravity offset: "+ gravityOffset[0] + " -- " + gravityOffset[1]);
+		//System.out.println("v + g: " + (currentXVelocity + gravityOffset[0]) + " -- " + (currentYVelocity + gravityOffset[1]));
 		Double sumX = currentXVelocity + gravityOffset[0];
 		Double sumY = currentYVelocity + gravityOffset[1];
 
@@ -274,33 +278,34 @@ public class DisplayObject {
 		currentYVelocity = (sumY < TERMINALVELOCITY) && (sumY > (TERMINALVELOCITY * -1)) ? currentYVelocity + gravityOffset[1] : currentYVelocity;
 
 		Point current = this.getPosition();
-		System.out.println("position: " + current);
+		//System.out.println("position: " + current);
 		int x = (int)(currentXVelocity);
 		int y = (int)(currentYVelocity);
-		System.out.println("setting points: " + x + " -- " + y);
+		//System.out.println("setting points: " + x + " -- " + y);
 
 		this.setPosition(new Point(current.x + x, current.y - y));
-		System.out.println("---------------");
+		this.updateHitbox(current.x + x, current.y - y);
+		//System.out.println("---------------");
 	}
 
 	// return array containing the x and y gravity offsets
 	public double[] getGravityOffset(DisplayObject obstacle) {
 		int obstacleMass = obstacle.getMass();
-		System.out.println("masses " + obstacleMass + " -- " + this.mass);
+		//System.out.println("masses " + obstacleMass + " -- " + this.mass);
 		Point obstaclePosition = obstacle.getCenter();
 		Point thisPosition = this.getPosition();
 
 		double distance = getDistance(thisPosition, obstaclePosition);
-		System.out.println("distance: " + distance);
+		//System.out.println("distance: " + distance);
 
 		double force = getForceDueToGravity(this.getMass(), obstacleMass, distance);
-		System.out.println("gForce: " + force);
+		//System.out.println("gForce: " + force);
 
 		double acceleration = force / this.mass;
-		System.out.println("acceleration: " + acceleration);
+		//System.out.println("acceleration: " + acceleration);
 
 		double angleBetween = getAngle(thisPosition, obstaclePosition);
-		System.out.println("angle: " + angleBetween);
+		//System.out.println("angle: " + angleBetween);
 
 		double scale = Math.pow(10, 4);
 		double  accelerationX = Math.cos(angleBetween) * acceleration * scale;
@@ -308,7 +313,7 @@ public class DisplayObject {
 		double accelerationY = Math.sin(angleBetween) * acceleration * scale;
 		accelerationY = (thisPosition.y < obstaclePosition.y) ? accelerationY * -1 : accelerationY;
 
-		System.out.println("acc components: " + accelerationX + " -- " + accelerationY);
+		//System.out.println("acc components: " + accelerationX + " -- " + accelerationY);
 		return new double[]{accelerationX, accelerationY};
 
 	}
@@ -330,7 +335,7 @@ public class DisplayObject {
 		else
 			yDiff = p2.y - p1.y;
 
-		System.out.println("xy diffs: "+ xDiff + " -- " + yDiff);
+		//System.out.println("xy diffs: "+ xDiff + " -- " + yDiff);
 		if (xDiff == 0)
 			return Math.PI;
 		return Math.atan((double)yDiff/xDiff);
@@ -401,19 +406,12 @@ public class DisplayObject {
 
 
 	public boolean collidesWith(DisplayObject other) {
-//	    Area thisHitbox = new Area(this.hitbox);
-//	    Area otherHitbox = new Area(other.hitbox);
-//	    thisHitbox.intersect(otherHitbox);
-//	    return !thisHitbox.isEmpty();
-        return this.hitbox.getBounds().intersects(other.hitbox.getBounds());
+		return this.hitbox.getBounds2D().intersects(other.hitbox.getBounds2D());
+
 	}
 
 	public boolean hitsGravityField(DisplayObject other) {
-//	    Area thisHitbox = new Area(this.hitbox);
-//	    Area otherHitbox = new Area(other.hitbox);
-//	    thisHitbox.intersect(otherHitbox);
-//	    return !thisHitbox.isEmpty();
-		return this.hitbox.getBounds().intersects(other.hitbox.getBounds());
+		return this.hitbox.getBounds2D().intersects(other.gravityHitbox.getBounds2D());
 	}
 
 	//Translation
@@ -421,7 +419,7 @@ public class DisplayObject {
 		AffineTransform ht = new AffineTransform();
 		ht.setToTranslation(translateX, translateY);
 		this.hitbox = ht.createTransformedShape(this.getHitbox());
-		//System.out.println(this.hitbox.getBounds());
+		//System.out.println(this.hitbox.getBounds2D().toString());
 	}
 
 	//Rotation

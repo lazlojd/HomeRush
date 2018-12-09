@@ -138,14 +138,24 @@ public class LabFiveGame extends Game {
             } else
                 resetWhiteDot();
 
-            System.out.println(spaceShip.getRotation());
+            //System.out.println(spaceShip.getRotation());
         } else {
-            // This applies gravitational affects from planet one to spaceship one
-            if(spaceShip.collidesWith(planetOne)) {
+            // This applies gravitational effects from planet one to spaceship when the spaceship hits the gravitational field
+            if(spaceShip.hitsGravityField(planetOne)) {
+                System.out.println("Hit gravity field of planet one");
                 spaceShip.updatePositionWithGravity(planetOne);
             }
-            if(spaceShip.collidesWith(sun)) {
+            // This applies gravitational effects from the sun to spaceship when the spaceship hits the gravitational field
+            if(spaceShip.hitsGravityField(sun)) {
+                System.out.println("Hit gravity field of sun");
                 spaceShip.updatePositionWithGravity(sun);
+            }
+            // The ship should reset when the spaceship collides with either the planet or the sun
+            if(spaceShip.collidesWith(planetOne) || spaceShip.collidesWith(sun)) {
+                System.out.println("Collided");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                resetWhiteDot();
             }
             else {
                 spaceShip.updatePosition();

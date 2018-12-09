@@ -2,26 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7042b396-32e8-4487-a353-8c693002dd45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/java/src/edu/virginia/lab5test/LabFiveGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/java/src/edu/virginia/lab5test/LabFiveGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/AnimatedSprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/Animation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/DisplayObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/DisplayObjectContainer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/Game$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/GameScenePanel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/SoundManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/display/Sprite.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/engine/util/GameClock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab1test/LabOneGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab2test/LabTwoGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab3test/LabThreeSimulator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab4test/LabFourGame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab1/edu/virginia/lab5test/LabFiveGame.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab5test/LabFiveGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="96" column="24" lean-forward="true" selection-start-line="96" selection-start-column="24" selection-end-line="96" selection-end-column="24" />
+            <state relative-caret-position="-527">
+              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
             </state>
           </provider>
         </entry>
@@ -44,8 +26,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="131" column="150" selection-start-line="131" selection-start-column="150" selection-end-line="131" selection-end-column="150" />
+            <state relative-caret-position="2991">
+              <caret line="336" lean-forward="true" selection-start-line="336" selection-end-line="336" />
+              <caret line="335" column="32" lean-forward="true" selection-start-line="335" selection-start-column="32" selection-end-line="335" selection-end-column="32" />
+              <caret line="334" column="12" lean-forward="true" selection-start-line="334" selection-start-column="12" selection-end-line="334" selection-end-column="12" />
+              <caret line="333" column="32" lean-forward="true" selection-start-line="333" selection-start-column="32" selection-end-line="333" selection-end-column="32" />
+              <caret line="332" column="24" lean-forward="true" selection-start-line="332" selection-start-column="24" selection-end-line="332" selection-end-column="24" />
+              <caret line="331" lean-forward="true" selection-start-line="331" selection-end-line="331" />
+              <caret line="330" column="32" lean-forward="true" selection-start-line="330" selection-start-column="32" selection-end-line="330" selection-end-column="32" />
+              <caret line="329" column="12" lean-forward="true" selection-start-line="329" selection-start-column="12" selection-end-line="329" selection-end-column="12" />
+              <caret line="328" column="32" lean-forward="true" selection-start-line="328" selection-start-column="32" selection-end-line="328" selection-end-column="32" />
+              <caret line="327" column="24" lean-forward="true" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
+              <caret line="326" column="44" selection-start-line="326" selection-start-column="44" selection-end-line="326" selection-end-column="44" />
+              <caret line="325" column="25" lean-forward="true" selection-start-line="325" selection-start-column="25" selection-end-line="325" selection-end-column="25" />
+              <caret line="324" lean-forward="true" selection-start-line="324" selection-end-line="324" />
               <folding>
                 <element signature="e#3006#3007#0" expanded="true" />
                 <element signature="e#3038#3039#0" expanded="true" />
@@ -109,6 +103,14 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>println</find>
+      <find>system.out.print</find>
+      <find>position</find>
+      <find>setting p</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -178,6 +180,13 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="virginia" type="462c0819:PsiDirectoryNode" />
+              <item name="lab4test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="lab1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="virginia" type="462c0819:PsiDirectoryNode" />
               <item name="lab5test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -187,7 +196,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544236874477" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544381039724" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -254,7 +263,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3289166" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998441" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -274,17 +283,43 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab4test/LabFourGame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3145">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/awt/geom/Area.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/lab5test/LabFiveGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="96" column="24" lean-forward="true" selection-start-line="96" selection-start-column="24" selection-end-line="96" selection-end-column="24" />
+        <state relative-caret-position="-527">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/java/src/edu/virginia/engine/display/DisplayObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="131" column="150" selection-start-line="131" selection-start-column="150" selection-end-line="131" selection-end-column="150" />
+        <state relative-caret-position="2991">
+          <caret line="336" lean-forward="true" selection-start-line="336" selection-end-line="336" />
+          <caret line="335" column="32" lean-forward="true" selection-start-line="335" selection-start-column="32" selection-end-line="335" selection-end-column="32" />
+          <caret line="334" column="12" lean-forward="true" selection-start-line="334" selection-start-column="12" selection-end-line="334" selection-end-column="12" />
+          <caret line="333" column="32" lean-forward="true" selection-start-line="333" selection-start-column="32" selection-end-line="333" selection-end-column="32" />
+          <caret line="332" column="24" lean-forward="true" selection-start-line="332" selection-start-column="24" selection-end-line="332" selection-end-column="24" />
+          <caret line="331" lean-forward="true" selection-start-line="331" selection-end-line="331" />
+          <caret line="330" column="32" lean-forward="true" selection-start-line="330" selection-start-column="32" selection-end-line="330" selection-end-column="32" />
+          <caret line="329" column="12" lean-forward="true" selection-start-line="329" selection-start-column="12" selection-end-line="329" selection-end-column="12" />
+          <caret line="328" column="32" lean-forward="true" selection-start-line="328" selection-start-column="32" selection-end-line="328" selection-end-column="32" />
+          <caret line="327" column="24" lean-forward="true" selection-start-line="327" selection-start-column="24" selection-end-line="327" selection-end-column="24" />
+          <caret line="326" column="44" selection-start-line="326" selection-start-column="44" selection-end-line="326" selection-end-column="44" />
+          <caret line="325" column="25" lean-forward="true" selection-start-line="325" selection-start-column="25" selection-end-line="325" selection-end-column="25" />
+          <caret line="324" lean-forward="true" selection-start-line="324" selection-end-line="324" />
           <folding>
             <element signature="e#3006#3007#0" expanded="true" />
             <element signature="e#3038#3039#0" expanded="true" />
