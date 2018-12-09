@@ -34,6 +34,7 @@ public class LabFiveGame extends Game {
         // Set spaceship at bottom left corner
         spaceShip.setPosition(new Point(150,800));
         spaceShip.setMass(1);
+        spaceShip.initializeCollisionHitbox();
 
         // Set pivot point to be center of spaceship
         spaceShip.setPivotPoint(new Point(30, 26));
@@ -45,10 +46,14 @@ public class LabFiveGame extends Game {
         // We want spaceship to gravitate toward center of planet, not upper left corner
         planetOne.setCenter(new Point(planetOne.getPosition().x - 50, planetOne.getPosition().y - 50));
         planetOne.setMass(5);
+        planetOne.initializeCollisionHitbox();
+        planetOne.initializeGravityHitbox();
         // Center sun horizontally and place on left side of screen
         sun.setPosition(new Point(100, 200));
         sun.setMass(10);
         sun.setCenter(new Point(sun.getPosition().x - 50, sun.getPosition().y - 50));
+        sun.initializeCollisionHitbox();
+        sun.initializeGravityHitbox();
 
         target.setPosition(new Point(700, 10));
 
@@ -136,8 +141,16 @@ public class LabFiveGame extends Game {
             System.out.println(spaceShip.getRotation());
         } else {
             // This applies gravitational affects from planet one to spaceship one
-            spaceShip.updatePositionWithGravity(planetOne);
-            spaceShip.updatePositionWithGravity(sun);
+            if(spaceShip.collidesWith(planetOne)) {
+                spaceShip.updatePositionWithGravity(planetOne);
+            }
+            if(spaceShip.collidesWith(sun)) {
+                spaceShip.updatePositionWithGravity(sun);
+            }
+            else {
+                spaceShip.updatePosition();
+            }
+
             //spaceShip.updatePosition();
         }
 

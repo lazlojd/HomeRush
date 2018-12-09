@@ -2,6 +2,8 @@ package edu.virginia.engine.display;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +61,7 @@ public class DisplayObject {
 	private int mass;
 	final private double G = 1;
 	private Point center;
+	private Shape gravityHitbox;
 
 	/* Spaceship variables */
 	final private double INITIALVELOCITY = 12;
@@ -109,14 +112,28 @@ public class DisplayObject {
 
 	}
 
+
+	/**
+	 * Hitbox constructors
+	 */
 	public void initializeRectangleHitbox() {
 	    this.hitbox = new Rectangle(this.getPosition().x, this.getPosition().y,
 				this.getUnscaledWidth(), this.getUnscaledHeight());
-
 	    //System.out.println(this.hitbox.getBounds());
     }
 
-    public boolean getBounciness() {
+    //Acts similar to a rectangular hitbox except the area
+    public void initializeCollisionHitbox() {
+		this.hitbox = new Ellipse2D.Double(this.getPosition().x, this.getPosition().y,
+				this.getUnscaledWidth(), this.getUnscaledHeight());
+		}
+
+	public void initializeGravityHitbox() {
+		this.gravityHitbox = new Ellipse2D.Double(this.getPosition().x - this.getUnscaledWidth()/2.0, this.getPosition().y - this.getUnscaledWidth()/2.0,
+				this.getUnscaledWidth() * 2, this.getUnscaledHeight() * 2);
+	}
+
+	public boolean getBounciness() {
 		return this.hasBounciness;
 	}
 	
@@ -164,6 +181,10 @@ public class DisplayObject {
 	public void setFalling(boolean value) {
 		this.isFalling = value;
 	}
+
+	/**
+	 * Setter methods
+	 */
 
 	public void setAlpha(Float alpha) {
 		this.alpha = alpha;
@@ -387,6 +408,14 @@ public class DisplayObject {
         return this.hitbox.getBounds().intersects(other.hitbox.getBounds());
 	}
 
+	public boolean hitsGravityField(DisplayObject other) {
+//	    Area thisHitbox = new Area(this.hitbox);
+//	    Area otherHitbox = new Area(other.hitbox);
+//	    thisHitbox.intersect(otherHitbox);
+//	    return !thisHitbox.isEmpty();
+		return this.hitbox.getBounds().intersects(other.hitbox.getBounds());
+	}
+
 	//Translation
 	public void updateHitbox(int translateX, int translateY) {
 		AffineTransform ht = new AffineTransform();
@@ -416,9 +445,6 @@ public class DisplayObject {
 	public boolean getPhysics() {
 	    return this.hasPhysics;
     }
-
-
-
 
 
 	/**
@@ -505,6 +531,8 @@ public class DisplayObject {
 					(int) (getUnscaledHeight()), null);
 			if (this.hitbox != null)
 				g2d.draw(this.hitbox);
+			if (this.gravityHitbox != null)
+				g2d.draw(this.gravityHitbox);
 
 
 			/*
