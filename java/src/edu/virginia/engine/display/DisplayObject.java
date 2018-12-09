@@ -284,7 +284,7 @@ public class DisplayObject {
 		int y = (int)(currentYVelocity);
 		this.setPosition(new Point(current.x + x, current.y - y));
 		this.updateHitbox(x, -y);
-		System.out.println(this.hitbox.getBounds2D().toString());
+		System.out.println(this.id + ": " + this.hitbox.getBounds2D().toString());
 	}
 
 	/* These methods are only ever called from the spaceships perspective

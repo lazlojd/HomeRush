@@ -55,7 +55,7 @@ public class LabFiveGame extends Game {
         sun.initializeCollisionHitbox();
         sun.initializeGravityHitbox();
 
-        target.setPosition(new Point(700, 10));
+        target.setPosition(new Point(700, 50));
         target.initializeCollisionHitbox();
 
         levelOne.addChild(target);
