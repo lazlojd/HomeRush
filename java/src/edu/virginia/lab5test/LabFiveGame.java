@@ -56,6 +56,7 @@ public class LabFiveGame extends Game {
         sun.initializeGravityHitbox();
 
         target.setPosition(new Point(700, 10));
+        target.initializeCollisionHitbox();
 
         levelOne.addChild(target);
         levelOne.addChild(spaceShip);
@@ -140,6 +141,7 @@ public class LabFiveGame extends Game {
 
             //System.out.println(spaceShip.getRotation());
         } else {
+
             // This applies gravitational effects from planet one to spaceship when the spaceship hits the gravitational field
             if(spaceShip.hitsGravityField(planetOne)) {
                 System.out.println("Hit gravity field of planet one");
@@ -155,6 +157,16 @@ public class LabFiveGame extends Game {
                 System.out.println("Collided");
                 spaceShip.setPosition(new Point(150,800));
                 spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
+                resetWhiteDot();
+            }
+            if(spaceShip.collidesWith(target)) {
+                System.out.println("Victory!");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
                 resetWhiteDot();
             }
             else {

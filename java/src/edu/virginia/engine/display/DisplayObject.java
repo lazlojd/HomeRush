@@ -31,22 +31,15 @@ public class DisplayObject {
 	/* The image that is displayed by this object */
 	private BufferedImage displayImage;
 
-	/* Lab 1 part 1 */
+	/* General variables */
 	protected Point position;
 	private Point pivotPoint;
 	private float rotation;
-
-	/* Lab 1 part 2*/
 	public Boolean visible;
 	public Float alpha;
 	public Float oldAlpha;
 	public Double scaleX;
 	public Double scaleY;
-
-	/* Lab 4 */
-	private Shape hitbox;
-
-	/* Lab 5 */
 	public Boolean hasPhysics;
 	private Boolean hasBounciness;
 	private int lastX;
@@ -61,13 +54,16 @@ public class DisplayObject {
 	private int mass;
 	final private double G = 1;
 	private Point center;
-	private Shape gravityHitbox;
 
 	/* Spaceship variables */
 	final private double INITIALVELOCITY = 12;
 	final private int TERMINALVELOCITY = 20;
 	private double currentXVelocity;
 	private double currentYVelocity;
+
+	/* Hitbox variables */
+	private Shape hitbox;
+	private Shape gravityHitbox;
 
 
 	// Use of AffineTransform sourced from
@@ -107,9 +103,6 @@ public class DisplayObject {
 
         this.currentXVelocity = INITIALVELOCITY;
         this.currentYVelocity = INITIALVELOCITY;
-
-
-
 	}
 
 
@@ -137,6 +130,14 @@ public class DisplayObject {
 		System.out.println(this.gravityHitbox.getBounds2D().toString());
 	}
 
+	/**
+	 * Getter methods
+	 */
+
+	public String getId() {
+		return id;
+	}
+
 	public boolean getBounciness() {
 		return this.hasBounciness;
 	}
@@ -161,30 +162,42 @@ public class DisplayObject {
 		return scaleY;
 	}
 
-	public void setBounciness(boolean value) {
-		this.hasBounciness = value;
-	}
-
 	public boolean getFalling() {
 		return this.isFalling;
 	}
-	public void setVisible(Boolean visible) {
-		this.visible = visible;
-		if (visible) {
-		    this.setAlpha(1.0f);
-        } else {
-		    this.setAlpha(0.0f);
-        }
-	}
+
 	public Point getCenter() {
 		return this.center;
 	}
-	public void setCenter(Point center) {
-		this.center = center;
+
+	public Point getPosition() {
+		return position;
 	}
-	public void setFalling(boolean value) {
-		this.isFalling = value;
+
+	public Point getPivotPoint() {
+		return pivotPoint;
 	}
+
+	public float getRotation() {
+		return rotation;
+	}
+
+	public boolean getPhysics() {
+		return this.hasPhysics;
+	}
+
+	public int getMass() {
+		return mass;
+	}
+
+	public Shape getCircularHitbox() {
+		return  this.hitbox;
+	}
+
+	public Shape getHitbox() {
+		return this.hitbox;
+	}
+
 
 	/**
 	 * Setter methods
@@ -210,35 +223,48 @@ public class DisplayObject {
 		this.id = id;
 	}
 
-	public String getId() {
-	    return id;
-	}
-
-	public Point getPosition() {
-	    return position;
-	}
-
-	public Point getPivotPoint() { return pivotPoint; }
-
-	public float getRotation() {
-	    return rotation;
-	}
-
-	public int getMass() { return mass;}
-
-	public void setMass(int mass) {this.mass = mass;};
-
 	public void setPosition(Point position) {
-	    this.position = position;
+		this.position = position;
 	}
 
 	public void setPivotPoint(Point pivotPoint) {
-	    this.pivotPoint = pivotPoint;
+		this.pivotPoint = pivotPoint;
 	}
 
 	public void setRotation(float rotation) {
-	    this.rotation = rotation;
+		this.rotation = rotation;
 	}
+
+	public void setVisible(Boolean visible) {
+		this.visible = visible;
+		if (visible) {
+			this.setAlpha(1.0f);
+		} else {
+			this.setAlpha(0.0f);
+		}
+	}
+
+	public void setPhysics(Boolean hasPhysics) {
+		this.hasPhysics = hasPhysics;
+	}
+
+	public void setBounciness(boolean value) {
+		this.hasBounciness = value;
+	}
+
+	public void setFalling(boolean value) {
+		this.isFalling = value;
+	}
+
+	public void setMass(int mass) {this.mass = mass;};
+
+	public void setCenter(Point center) {
+		this.center = center;
+	}
+
+	/**
+	 * Gravity and spaceship specific methods
+	 */
 
 	public void resetVelocity() {
 		this.currentXVelocity = INITIALVELOCITY;
@@ -257,6 +283,8 @@ public class DisplayObject {
 		int x = (int)(currentXVelocity);
 		int y = (int)(currentYVelocity);
 		this.setPosition(new Point(current.x + x, current.y - y));
+		this.updateHitbox(x, -y);
+		System.out.println(this.hitbox.getBounds2D().toString());
 	}
 
 	/* These methods are only ever called from the spaceships perspective
@@ -284,7 +312,7 @@ public class DisplayObject {
 		//System.out.println("setting points: " + x + " -- " + y);
 
 		this.setPosition(new Point(current.x + x, current.y - y));
-		this.updateHitbox(current.x + x, current.y - y);
+		this.updateHitbox(x, -y);
 		//System.out.println("---------------");
 	}
 
@@ -400,10 +428,10 @@ public class DisplayObject {
 	    this.parentObject = null;
     }
 
-    public Shape getHitbox() {
-		return this.hitbox;
-	}
-
+	/**
+	 * Hitbox methods
+	 *
+	 */
 
 	public boolean collidesWith(DisplayObject other) {
 		return this.hitbox.getBounds2D().intersects(other.hitbox.getBounds2D());
@@ -435,14 +463,6 @@ public class DisplayObject {
 		ht.scale(this.getScaleX() + scale, this.getScaleY() + scale);
 		this.hitbox = ht.createTransformedShape(this.getHitbox());
 	}
-
-	public void setPhysics(Boolean hasPhysics) {
-		this.hasPhysics = hasPhysics;
-	}
-
-	public boolean getPhysics() {
-	    return this.hasPhysics;
-    }
 
 
 	/**
