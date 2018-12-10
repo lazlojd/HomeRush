@@ -554,18 +554,12 @@ public class DisplayObject {
 			g2d.drawImage(displayImage, 0, 0,
 					(int) (getUnscaledWidth()),
 					(int) (getUnscaledHeight()), null);
-			if (this.hitbox != null)
-				g2d.draw(this.hitbox);
-
-
 
 			/*
 			 * undo the transformations so this doesn't affect other display
 			 * objects
 			 */
 			reverseTransformations(g2d);
-
-
 		}
 	}
 

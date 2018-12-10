@@ -14,13 +14,17 @@ public class LabFiveGame extends Game {
     Sprite levelTwo;
     Sprite levelThree;
     Sprite planetOne;
+    Sprite planetTwo;
     Sprite planetThree;
     Sprite planetFour;
+    Sprite planetFive;
     Sprite whiteDwarf;
+    Sprite asteroid;
     Sprite sun;
     Sprite moon;
-    Sprite spaceShip;
+    Sprite spaceShip = new Sprite("spaceship", "spaceship.png");
     Sprite spaceShip2;
+    Sprite spaceShip3;
     Sprite whiteTrajectoryDot;
     Sprite target;
     Sprite reset;
@@ -32,7 +36,7 @@ public class LabFiveGame extends Game {
     int whiteDotTimer = 50;
     int messageTimer = 0;
     boolean didWin;
-    int level = 3;
+    int level = 1;
     final Point INITIALSHIPPOSITION = new Point(150,800);
     final Point INITIALPIVOT = new Point(30, 26);
     final Point CENTER = new Point(350, 350);
@@ -41,15 +45,19 @@ public class LabFiveGame extends Game {
     private void initSprites() {
         levelOne = new Sprite("backgroundLevelOne", "spaceBackground.jpg");
         levelTwo = new Sprite("backgroundLevelTwo", "spaceBackground.jpg");
-        levelThree = new Sprite("backgroundLevelThree", "white.jpg");
+        levelThree = new Sprite("backgroundLevelThree", "spaceBackground.jpg");
         planetOne = new Sprite("planetOne", "planet1.png");
+        planetTwo = new Sprite("planetTwo", "planet2.png");
         planetThree = new Sprite("planetThree", "planet3.png");
         planetFour = new Sprite("planetFour", "planet4.png");
+        planetFive = new Sprite("planetFive", "planet5.png");
         whiteDwarf = new Sprite("whiteDwarf", "whiteDwarf.png");
+        asteroid = new Sprite("asteroid", "asteroid.png");
         moon = new Sprite("moon", "moon.png");
         sun = new Sprite("sun", "sun.png");
         spaceShip = new Sprite("spaceship", "spaceship.png");
         spaceShip2 = new Sprite("spaceship2", "spaceship.png");
+        spaceShip3 = new Sprite("spaceship3", "spaceship.png");
         whiteTrajectoryDot = new Sprite("whiteDot", "whiteDot.png");
         target = new Sprite("target", "target.png");
         reset = new Sprite("reset", "reset.png");
@@ -102,29 +110,61 @@ public class LabFiveGame extends Game {
     }
 
     private  void initLevelTwo() {
+        spaceShip2.setPosition(INITIALSHIPPOSITION);
+        spaceShip2.setMass(1);
+        spaceShip2.initializeCollisionHitbox();
+        resetWhiteDot();
 
+        planetTwo.setPosition(new Point(700, 700));
+        planetTwo.setMass(3);
+        planetTwo.setCenter(new Point(820, 820));
+        planetTwo.initializeCollisionHitbox();
+
+        planetThree.setPosition(new Point(25, 400));
+        planetThree.setMass(5);
+        planetThree.setCenter(new Point(137, 465));
+        planetThree.initializeCollisionHitbox();
+
+        asteroid.setPosition(new Point(-50, -150));
+        asteroid.setMass(1);
+        asteroid.setCenter(new Point(asteroid.getPosition().x + 25, asteroid.getPosition().y + 25));
+        asteroid.initializeCollisionHitbox();
+
+        target.setPosition(new Point(700, 50));
+        target.initializeCollisionHitbox();
+
+        levelTwo.addChild(spaceShip2);
+        //levelTwo.addChild(whiteTrajectoryDot);
+        levelTwo.addChild(asteroid);
+        levelTwo.addChild(planetTwo);
+        levelTwo.addChild(planetThree);
+        levelTwo.addChild(target);
+        levelTwo.addChild(winMessage);
+        levelTwo.addChild(loseMessage);
+        levelTwo.addChild(whiteTrajectoryDot);
+        levelTwo.addChild(reset);
     }
 
     private void initLevelThree() {
 
 
         // Set spaceship at bottom left corner
-        spaceShip2.setPosition(INITIALSHIPPOSITION);
-        spaceShip2.setMass(1);
-        spaceShip2.initializeCollisionHitbox();
+        spaceShip3.setPosition(INITIALSHIPPOSITION);
+        spaceShip3.setMass(1);
+        spaceShip3.initializeCollisionHitbox();
         resetWhiteDot();
 
-        planetThree.setPosition(new Point(700, 700));
-        planetThree.setMass(3);
-        planetThree.setCenter(new Point(820, 820));
-        planetThree.initializeCollisionHitbox();
+        planetFour.setPosition(new Point(700, 700));
+        planetFour.setMass(3);
+        planetFour.setCenter(new Point(820, 820));
+        planetFour.initializeCollisionHitbox();
         moon.setPosition(new Point(600, 600));
         moon.initializeCollisionHitbox();
 
-        planetFour.setPosition(new Point(50, 400));
-        planetFour.setMass(3);
-        planetFour.setCenter(new Point(137, 465));
-        planetFour.initializeCollisionHitbox();
+        planetFive.setPosition(new Point(50, 400));
+        planetFive.setMass(3);
+        planetFive.setCenter(new Point(137, 465));
+        planetFive.initializeCollisionHitbox();
 
         whiteDwarf.setPosition(new Point(500, 250));
         whiteDwarf.setMass(7);
@@ -134,19 +174,17 @@ public class LabFiveGame extends Game {
         target.setPosition(new Point(700, 50));
         target.initializeCollisionHitbox();
 
-        levelThree.addChild(spaceShip2);
+        levelThree.addChild(spaceShip3);
         //levelThree.addChild(whiteTrajectoryDot);
-        levelThree.addChild(planetThree);
-        levelThree.addChild(moon);
         levelThree.addChild(planetFour);
+        levelThree.addChild(moon);
+        levelThree.addChild(planetFive);
         levelThree.addChild(whiteDwarf);
         levelThree.addChild(target);
         levelThree.addChild(winMessage);
         levelThree.addChild(loseMessage);
         levelThree.addChild(whiteTrajectoryDot);
         levelThree.addChild(reset);
-
-
     }
 
     private void resetWhiteDot() {
@@ -164,13 +202,11 @@ public class LabFiveGame extends Game {
         super("Lab Five Test Game", 900, 900);
         initSprites();
         initLevelOne();
-        //initLevelTwo();
+        initLevelTwo();
         initLevelThree();
         messageTimer = 0;
         didWin = false;
         launched = false;
-
-
     }
 
 
@@ -199,15 +235,35 @@ public class LabFiveGame extends Game {
                 collisionReset(spaceShip);
             }
         }
-        else if (level == 3) {
+        else if (level == 2) {
             ship = spaceShip2;
-            spaceShip2.updatePositionWithGravity(planetFour);
-            spaceShip2.updatePositionWithGravity(whiteDwarf);
+            if((asteroid.getPosition().x) > 1000) {
+                asteroid.setPosition(new Point(150,50));
+                asteroid.initializeCollisionHitbox();
+            }
+            else {
+                asteroid.setPosition(new Point(asteroid.getPosition().x + 2, asteroid.getPosition().y + 2));
+                asteroid.setCenter(new Point(asteroid.getPosition().x + 25, asteroid.getPosition().y + 25));
+                asteroid.initializeCollisionHitbox();
+            }
+            spaceShip2.updatePositionWithGravity(planetTwo);
             spaceShip2.updatePositionWithGravity(planetThree);
+            spaceShip2.updatePositionWithGravity(asteroid);
 
 
-            if(spaceShip2.collidesWith(planetThree) || spaceShip2.collidesWith(whiteDwarf) || spaceShip2.collidesWith(planetFour) || spaceShip2.collidesWith(moon)) {
+            if(spaceShip2.collidesWith(planetTwo) || spaceShip2.collidesWith(planetThree) || spaceShip2.collidesWith(asteroid)) {
                 collisionReset(spaceShip2);
+            }
+        }
+        else if (level == 3) {
+            ship = spaceShip3;
+            spaceShip3.updatePositionWithGravity(whiteDwarf);
+            spaceShip3.updatePositionWithGravity(planetTwo);
+            spaceShip3.updatePositionWithGravity(planetThree);
+
+
+            if(spaceShip3.collidesWith(planetFour) || spaceShip3.collidesWith(planetFive) || spaceShip3.collidesWith(whiteDwarf) || spaceShip3.collidesWith(moon)) {
+                collisionReset(spaceShip3);
             }
         }
 
@@ -233,8 +289,20 @@ public class LabFiveGame extends Game {
     }
 
     public void handleSpaceshipPreLaunch(ArrayList<Integer> pressedKeys) {
-        if (level == 3)
+        if(level == 2)
             spaceShip = spaceShip2;
+            if((asteroid.getPosition().x) > 1000) {
+                asteroid.setPosition(new Point(150,50));
+                asteroid.initializeCollisionHitbox();
+            }
+            else {
+                asteroid.setPosition(new Point(asteroid.getPosition().x + 2, asteroid.getPosition().y + 2));
+                asteroid.setCenter(new Point(asteroid.getPosition().x + 25, asteroid.getPosition().y + 25));
+                asteroid.initializeCollisionHitbox();
+            }
+
+        if (level == 3)
+            spaceShip = spaceShip3;
 
         if (justRotated == 0) {
             /* right to move Spaceship position right */
@@ -281,10 +349,16 @@ public class LabFiveGame extends Game {
             if (level == 1) {
                 whiteTrajectoryDot.updatePositionWithGravity(planetOne);
                 whiteTrajectoryDot.updatePositionWithGravity(sun);
-            } else if (level == 3) {
-                System.out.println("correct level");
+            }
+            if (level == 2) {
+                whiteTrajectoryDot.updatePositionWithGravity(planetTwo);
                 whiteTrajectoryDot.updatePositionWithGravity(planetThree);
+                whiteTrajectoryDot.updatePositionWithGravity(asteroid);
+            }
+            else if (level == 3) {
+                System.out.println("correct level");
                 whiteTrajectoryDot.updatePositionWithGravity(planetFour);
+                whiteTrajectoryDot.updatePositionWithGravity(planetFive);
                 whiteTrajectoryDot.updatePositionWithGravity(whiteDwarf);
             }
             whiteDotTimer -= 1;
@@ -292,6 +366,14 @@ public class LabFiveGame extends Game {
             resetWhiteDot();
 
         if (whiteTrajectoryDot.collidesWith(planetOne) || whiteTrajectoryDot.collidesWith(sun)) {
+            resetWhiteDot();
+        }
+
+        if (whiteTrajectoryDot.collidesWith(planetTwo) || whiteTrajectoryDot.collidesWith(planetThree)) {
+            resetWhiteDot();
+        }
+
+        if (whiteTrajectoryDot.collidesWith(planetFour) || whiteTrajectoryDot.collidesWith(planetFive) || whiteTrajectoryDot.collidesWith(whiteDwarf) || whiteTrajectoryDot.collidesWith(moon)) {
             resetWhiteDot();
         }
 
