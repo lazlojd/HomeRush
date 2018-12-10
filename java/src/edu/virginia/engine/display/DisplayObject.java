@@ -236,6 +236,7 @@ public class DisplayObject {
 	}
 
 	public void setVisible(Boolean visible) {
+	    System.out.println(this.id + ": " + visible);
 		this.visible = visible;
 		if (visible) {
 			this.setAlpha(1.0f);

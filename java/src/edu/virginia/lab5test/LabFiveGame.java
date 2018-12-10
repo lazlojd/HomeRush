@@ -11,16 +11,26 @@ import java.util.ArrayList;
 public class LabFiveGame extends Game {
 
     Sprite levelOne;
+    Sprite levelTwo;
     Sprite planetOne;
     Sprite sun;
     Sprite spaceShip;
     Sprite whiteTrajectoryDot;
     Sprite target;
+    Sprite reset;
+    Sprite winMessage;
+    Sprite loseMessage;
+    Sprite currentMessage;
     boolean launched;
     int justRotated = 10;
     int whiteDotTimer = 50;
+    int messageTimer = 0;
+    boolean didWin;
+    int level = 1;
     final Point INITIALSHIPPOSITION = new Point(150,800);
     final Point INITIALPIVOT = new Point(30, 26);
+    final Point CENTER = new Point(350, 350);
+    final Point STAGERIGHT = new Point(1000, 0);
 
     private void initSprites() {
         levelOne = new Sprite("backgroundLevelOne", "spaceBackground.jpg");
@@ -29,7 +39,9 @@ public class LabFiveGame extends Game {
         spaceShip = new Sprite("spaceship", "spaceship.png");
         whiteTrajectoryDot = new Sprite("whiteDot", "whiteDot.png");
         target = new Sprite("target", "target.png");
-
+        reset = new Sprite("reset", "reset.png");
+        winMessage = new Sprite("win", "winner.jpg");
+        loseMessage = new Sprite("loser", "lose.png");
     }
 
     private void initLevelOne() {
@@ -60,13 +72,30 @@ public class LabFiveGame extends Game {
         target.setPosition(new Point(700, 50));
         target.initializeCollisionHitbox();
 
+
+        winMessage.setPosition(STAGERIGHT);
+
+        loseMessage.setPosition(STAGERIGHT);
+
+
         levelOne.addChild(target);
         levelOne.addChild(spaceShip);
         levelOne.addChild(whiteTrajectoryDot);
         levelOne.addChild(planetOne);
+        levelOne.addChild(loseMessage);
         levelOne.addChild(sun);
+        levelOne.addChild(reset);
+        levelOne.addChild(winMessage);
 
+
+
+        messageTimer = 0;
+        didWin = false;
         launched = false;
+    }
+
+    private  void initLevelTwo() {
+        levelTwo = new Sprite("backgroundLevelTwo", "spaceBackground.jpg");
     }
 
     private void resetWhiteDot() {
@@ -77,15 +106,14 @@ public class LabFiveGame extends Game {
         whiteTrajectoryDot.initializeCollisionHitbox();
         whiteTrajectoryDot.resetVelocity();
         whiteTrajectoryDot.launch();
-        whiteDotTimer = 100;
+        whiteDotTimer = 20;
     }
 
     public LabFiveGame() {
         super("Lab Five Test Game", 900, 900);
-        //System.out.println("mush0 pos");
         initSprites();
         initLevelOne();
-
+        initLevelTwo();
     }
 
 
@@ -97,6 +125,16 @@ public class LabFiveGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
+
+        if (messageTimer > 0) {
+            messageTimer -= 1;
+            if (messageTimer == 0) {
+                currentMessage.setPosition(STAGERIGHT);
+                if (currentMessage.getId() == "win")
+                    level += 1;
+            }
+            return;
+        }
 
         if (pressedKeys.contains((KeyEvent.VK_R))) {
             System.out.println("RESET");
@@ -151,6 +189,15 @@ public class LabFiveGame extends Game {
             } else
                 resetWhiteDot();
 
+            if (whiteTrajectoryDot.collidesWith(planetOne) || whiteTrajectoryDot.collidesWith(sun)) {
+                resetWhiteDot();
+            }
+
+            if (whiteTrajectoryDot.collidesWith(target)) {
+
+                resetWhiteDot();
+            }
+
             //System.out.println(spaceShip.getRotation());
         } else {
 
@@ -163,22 +210,30 @@ public class LabFiveGame extends Game {
             // The ship should reset when the spaceship collides with either the planet or the sun
             if(spaceShip.collidesWith(planetOne) || spaceShip.collidesWith(sun)) {
                 System.out.println("Collided");
+                currentMessage = loseMessage;
+                currentMessage.setPosition(CENTER);
                 spaceShip.setPosition(new Point(150,800));
                 spaceShip.setPivotPoint(new Point(30, 26));
                 spaceShip.initializeCollisionHitbox();
                 launched = false;
+
+                messageTimer = 100;
                 resetWhiteDot();
             }
 
             if(spaceShip.collidesWith(target)) {
                 System.out.println("Victory!");
+                currentMessage = winMessage;
+                currentMessage.setPosition(CENTER);
                 spaceShip.setPosition(new Point(150,800));
                 spaceShip.setPivotPoint(new Point(30, 26));
                 spaceShip.initializeCollisionHitbox();
                 launched = false;
+                messageTimer = 100;
                 resetWhiteDot();
             }
-            
+
+
 
             //spaceShip.updatePosition();
         }
@@ -200,8 +255,9 @@ public class LabFiveGame extends Game {
     public void draw(Graphics g) {
         super.draw(g);
 
-        if (levelOne != null) levelOne.draw(g);
+        if (levelOne != null && level == 1) levelOne.draw(g);
 
+        if (levelTwo != null && level == 2) levelTwo.draw(g);
 
 
     }
