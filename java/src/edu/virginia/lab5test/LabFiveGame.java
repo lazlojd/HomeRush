@@ -92,7 +92,7 @@ public class LabFiveGame extends Game {
         if (!launched) {
 
             if (justRotated == 0) {
-                /* left to move Spaceship position left */
+                /* right to move Spaceship position right */
                 if (pressedKeys.contains(KeyEvent.VK_RIGHT)) {
                     spaceShip.setPosition(new Point(spaceShip.getPosition().x + 10, spaceShip.getPosition().y));
                     whiteTrajectoryDot.setPosition(new Point(spaceShip.getPosition().x, spaceShip.getPosition().y));

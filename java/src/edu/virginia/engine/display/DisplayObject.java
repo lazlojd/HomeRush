@@ -249,6 +249,7 @@ public class DisplayObject {
 		Double sumX = currentXVelocity + gravityOffset[0];
 		Double sumY = currentYVelocity + gravityOffset[1];
 
+		// Don't allow super large velocities
 		currentXVelocity = (sumX < TERMINALVELOCITY) && (sumX > (TERMINALVELOCITY * -1)) ? currentXVelocity + gravityOffset[0] : currentXVelocity;
 		currentYVelocity = (sumY < TERMINALVELOCITY) && (sumY > (TERMINALVELOCITY * -1)) ? currentYVelocity + gravityOffset[1] : currentYVelocity;
 
@@ -283,8 +284,10 @@ public class DisplayObject {
 
 		double scale = Math.pow(10, 4);
 		double  accelerationX = Math.cos(angleBetween) * acceleration * scale;
-		accelerationX = (thisPosition.x > obstaclePosition.x) ? accelerationX * -1 : accelerationX;
 		double accelerationY = Math.sin(angleBetween) * acceleration * scale;
+
+		// Make sure acceleration vectors have the right direction
+		accelerationX = (thisPosition.x > obstaclePosition.x) ? accelerationX * -1 : accelerationX;
 		accelerationY = (thisPosition.y < obstaclePosition.y) ? accelerationY * -1 : accelerationY;
 
 		System.out.println("acc components: " + accelerationX + " -- " + accelerationY);
@@ -313,8 +316,8 @@ public class DisplayObject {
 		if (xDiff == 0)
 			return Math.PI;
 		return Math.atan((double)yDiff/xDiff);
-
 	}
+
 	private Double getDistance(Point p1, Point p2) {
 		Double value = Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
 		return Math.pow(value, 0.5);
