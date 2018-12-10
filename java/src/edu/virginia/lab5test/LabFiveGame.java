@@ -19,6 +19,8 @@ public class LabFiveGame extends Game {
     boolean launched;
     int justRotated = 10;
     int whiteDotTimer = 50;
+    final Point INITIALSHIPPOSITION = new Point(150,800);
+    final Point INITIALPIVOT = new Point(30, 26);
 
     private void initSprites() {
         levelOne = new Sprite("backgroundLevelOne", "spaceBackground.jpg");
@@ -34,6 +36,7 @@ public class LabFiveGame extends Game {
         // Set spaceship at bottom left corner
         spaceShip.setPosition(new Point(150,800));
         spaceShip.setMass(1);
+        spaceShip.initializeCollisionHitbox();
 
         // Set pivot point to be center of spaceship
         spaceShip.setPivotPoint(new Point(30, 26));
@@ -45,12 +48,17 @@ public class LabFiveGame extends Game {
         // We want spaceship to gravitate toward center of planet, not upper left corner
         planetOne.setCenter(new Point(planetOne.getPosition().x - 50, planetOne.getPosition().y - 50));
         planetOne.setMass(5);
+        planetOne.initializeCollisionHitbox();
+        planetOne.initializeGravityHitbox();
         // Center sun horizontally and place on left side of screen
         sun.setPosition(new Point(100, 200));
         sun.setMass(10);
         sun.setCenter(new Point(sun.getPosition().x - 50, sun.getPosition().y - 50));
+        sun.initializeCollisionHitbox();
+        sun.initializeGravityHitbox();
 
-        target.setPosition(new Point(700, 10));
+        target.setPosition(new Point(700, 50));
+        target.initializeCollisionHitbox();
 
         levelOne.addChild(target);
         levelOne.addChild(spaceShip);
@@ -66,6 +74,7 @@ public class LabFiveGame extends Game {
         whiteTrajectoryDot.setMass(1);
         whiteTrajectoryDot.setPivotPoint(new Point(spaceShip.getPivotPoint().x, spaceShip.getPivotPoint().y));
         whiteTrajectoryDot.setRotation(spaceShip.getRotation());
+        whiteTrajectoryDot.initializeCollisionHitbox();
         whiteTrajectoryDot.resetVelocity();
         whiteTrajectoryDot.launch();
         whiteDotTimer = 100;
@@ -88,6 +97,15 @@ public class LabFiveGame extends Game {
     @Override
     public void update(ArrayList<Integer> pressedKeys) {
         super.update(pressedKeys);
+
+        if (pressedKeys.contains((KeyEvent.VK_R))) {
+            System.out.println("RESET");
+            spaceShip.setPosition(INITIALSHIPPOSITION);
+            spaceShip.setPivotPoint(INITIALPIVOT);
+            spaceShip.initializeCollisionHitbox();
+            launched = false;
+            resetWhiteDot();
+        }
 
         if (!launched) {
 
@@ -133,11 +151,35 @@ public class LabFiveGame extends Game {
             } else
                 resetWhiteDot();
 
-            System.out.println(spaceShip.getRotation());
+            //System.out.println(spaceShip.getRotation());
         } else {
-            // This applies gravitational affects from planet one to spaceship one
+
+            // This applies gravitational effects from planet one to spaceship when the spaceship hits the gravitational field
             spaceShip.updatePositionWithGravity(planetOne);
+
+
             spaceShip.updatePositionWithGravity(sun);
+
+            // The ship should reset when the spaceship collides with either the planet or the sun
+            if(spaceShip.collidesWith(planetOne) || spaceShip.collidesWith(sun)) {
+                System.out.println("Collided");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
+                resetWhiteDot();
+            }
+
+            if(spaceShip.collidesWith(target)) {
+                System.out.println("Victory!");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
+                resetWhiteDot();
+            }
+            
+
             //spaceShip.updatePosition();
         }
 
@@ -159,6 +201,8 @@ public class LabFiveGame extends Game {
         super.draw(g);
 
         if (levelOne != null) levelOne.draw(g);
+
+
 
     }
 
