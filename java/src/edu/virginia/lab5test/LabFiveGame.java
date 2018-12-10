@@ -41,7 +41,7 @@ public class LabFiveGame extends Game {
     private void initSprites() {
         levelOne = new Sprite("backgroundLevelOne", "spaceBackground.jpg");
         levelTwo = new Sprite("backgroundLevelTwo", "spaceBackground.jpg");
-        levelThree = new Sprite("backgroundLevelThree", "white.jpg");
+        levelThree = new Sprite("backgroundLevelThree", "spaceBackground.jpg");
         planetOne = new Sprite("planetOne", "planet1.png");
         planetThree = new Sprite("planetThree", "planet3.png");
         planetFour = new Sprite("planetFour", "planet4.png");
@@ -210,8 +210,6 @@ public class LabFiveGame extends Game {
                 collisionReset(spaceShip2);
             }
         }
-
-
 
 
         // The ship should reset when the spaceship collides with either the planet or the sun
