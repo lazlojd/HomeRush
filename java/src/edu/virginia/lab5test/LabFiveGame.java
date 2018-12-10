@@ -34,6 +34,7 @@ public class LabFiveGame extends Game {
         // Set spaceship at bottom left corner
         spaceShip.setPosition(new Point(150,800));
         spaceShip.setMass(1);
+        spaceShip.initializeCollisionHitbox();
 
         // Set pivot point to be center of spaceship
         spaceShip.setPivotPoint(new Point(30, 26));
@@ -45,12 +46,17 @@ public class LabFiveGame extends Game {
         // We want spaceship to gravitate toward center of planet, not upper left corner
         planetOne.setCenter(new Point(planetOne.getPosition().x - 50, planetOne.getPosition().y - 50));
         planetOne.setMass(5);
+        planetOne.initializeCollisionHitbox();
+        planetOne.initializeGravityHitbox();
         // Center sun horizontally and place on left side of screen
         sun.setPosition(new Point(100, 200));
         sun.setMass(10);
         sun.setCenter(new Point(sun.getPosition().x - 50, sun.getPosition().y - 50));
+        sun.initializeCollisionHitbox();
+        sun.initializeGravityHitbox();
 
-        target.setPosition(new Point(700, 10));
+        target.setPosition(new Point(700, 50));
+        target.initializeCollisionHitbox();
 
         levelOne.addChild(target);
         levelOne.addChild(spaceShip);
@@ -133,11 +139,40 @@ public class LabFiveGame extends Game {
             } else
                 resetWhiteDot();
 
-            System.out.println(spaceShip.getRotation());
+            //System.out.println(spaceShip.getRotation());
         } else {
-            // This applies gravitational affects from planet one to spaceship one
-            spaceShip.updatePositionWithGravity(planetOne);
-            spaceShip.updatePositionWithGravity(sun);
+
+            // This applies gravitational effects from planet one to spaceship when the spaceship hits the gravitational field
+            if(spaceShip.hitsGravityField(planetOne)) {
+                System.out.println("Hit gravity field of planet one");
+                spaceShip.updatePositionWithGravity(planetOne);
+            }
+            // This applies gravitational effects from the sun to spaceship when the spaceship hits the gravitational field
+            if(spaceShip.hitsGravityField(sun)) {
+                System.out.println("Hit gravity field of sun");
+                spaceShip.updatePositionWithGravity(sun);
+            }
+            // The ship should reset when the spaceship collides with either the planet or the sun
+            if(spaceShip.collidesWith(planetOne) || spaceShip.collidesWith(sun)) {
+                System.out.println("Collided");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
+                resetWhiteDot();
+            }
+            if(spaceShip.collidesWith(target)) {
+                System.out.println("Victory!");
+                spaceShip.setPosition(new Point(150,800));
+                spaceShip.setPivotPoint(new Point(30, 26));
+                spaceShip.initializeCollisionHitbox();
+                launched = false;
+                resetWhiteDot();
+            }
+            else {
+                spaceShip.updatePosition();
+            }
+
             //spaceShip.updatePosition();
         }
 
