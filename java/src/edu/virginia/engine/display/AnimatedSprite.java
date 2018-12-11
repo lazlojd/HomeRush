@@ -22,6 +22,11 @@ public class AnimatedSprite extends Sprite {
     private GameClock gameClock;
 
 
+    public AnimatedSprite(String id, String fileName) {
+        super(id, fileName);
+        this.gameClock = new GameClock();
+        this.loadFrames();
+    }
 
     public AnimatedSprite(String id, String fileName, Point pos) {
         super(id, fileName);
@@ -49,12 +54,16 @@ public class AnimatedSprite extends Sprite {
         return animationSpeed;
     }
 
+    public boolean getPlaying() {
+        return this.playing;
+    }
     @Override
     public void draw(Graphics g) {
             if (this.gameClock.getElapsedTime() >= this.animationSpeed) {
                 if (this.playing) {
                     if (this.currentFrame == this.endFrame) {
-                        this.currentFrame = this.startFrame;
+                        this.stopAnimation(0);
+                        this.playing = false;
                     } else {
                         this.currentFrame++;
                     }
@@ -72,21 +81,21 @@ public class AnimatedSprite extends Sprite {
         this.frames = new ArrayList<DisplayObject>();
         this.animations = new ArrayList<Animation>();
         ArrayList paths = new ArrayList();
-        paths.add("mario_jump_0.png"); // mario at rest
-        paths.add("mario_jump_1.png");
-        paths.add("mario_jump_0.png");
-        paths.add("mario_run_1.png");
-        paths.add("mario_run_0.png");
-        for(int i = 0; i<5; i++) {
+        paths.add("spaceship.png");
+        paths.add("explosion0.png");
+        paths.add("explosion1.png");
+        paths.add("explosion2.png");
+
+        for(int i = 0; i < paths.size(); i++) {
             DisplayObject frame = new DisplayObject(paths.get(i).toString(), paths.get(i).toString());
             this.frames.add(frame);
         }
 
-        Animation jump = new Animation("jump",1,2);
-        Animation run = new Animation("run",3,4);
+        Animation explode = new Animation("explode",1,3);
 
-        this.animations.add(jump);
-        this.animations.add(run);
+
+        this.animations.add(explode);
+
     }
 
     /* Krishan */
@@ -103,6 +112,7 @@ public class AnimatedSprite extends Sprite {
 
     /* Partner 2 - Part 3 and 4 */
     public void animate(Animation animateObject) {
+        System.out.println("in Animate!!!!!!!!");
         if(this.playing) {
             return;
         }

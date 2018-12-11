@@ -1,5 +1,6 @@
 package edu.virginia.lab5test;
 
+import edu.virginia.engine.display.AnimatedSprite;
 import edu.virginia.engine.display.Game;
 import edu.virginia.engine.display.SoundManager;
 import edu.virginia.engine.display.Sprite;
@@ -22,15 +23,16 @@ public class LabFiveGame extends Game {
     Sprite asteroid;
     Sprite sun;
     Sprite moon;
-    Sprite spaceShip = new Sprite("spaceship", "spaceship.png");
-    Sprite spaceShip2;
-    Sprite spaceShip3;
+    AnimatedSprite spaceShip;
+    AnimatedSprite spaceShip2;
+    AnimatedSprite spaceShip3;
     Sprite whiteTrajectoryDot;
     Sprite target;
     Sprite reset;
     Sprite winMessage;
     Sprite loseMessage;
     Sprite currentMessage;
+    AnimatedSprite currentShip;
     boolean launched;
     int justRotated = 10;
     int whiteDotTimer = 50;
@@ -55,9 +57,9 @@ public class LabFiveGame extends Game {
         asteroid = new Sprite("asteroid", "asteroid.png");
         moon = new Sprite("moon", "moon.png");
         sun = new Sprite("sun", "sun.png");
-        spaceShip = new Sprite("spaceship", "spaceship.png");
-        spaceShip2 = new Sprite("spaceship2", "spaceship.png");
-        spaceShip3 = new Sprite("spaceship3", "spaceship.png");
+        spaceShip = new AnimatedSprite("spaceship", "spaceship.png");
+        spaceShip2 = new AnimatedSprite("spaceship2", "spaceship.png");
+        spaceShip3 = new AnimatedSprite("spaceship3", "spaceship.png");
         whiteTrajectoryDot = new Sprite("whiteDot", "whiteDot.png");
         target = new Sprite("target", "target.png");
         reset = new Sprite("reset", "reset.png");
@@ -210,21 +212,30 @@ public class LabFiveGame extends Game {
     }
 
 
-    private void collisionReset(Sprite spaceShip) {
+    private void collisionReset(AnimatedSprite spaceShip) {
         System.out.println("Collided");
+        spaceShip.animate("explode");
         currentMessage = loseMessage;
         currentMessage.setPosition(CENTER);
+        currentShip = spaceShip;
+        messageTimer = 100;
+
+    }
+
+    private void collisionResetPosition(AnimatedSprite spaceShip) {
         spaceShip.setPosition(INITIALSHIPPOSITION);
         spaceShip.setPivotPoint(INITIALPIVOT);
         spaceShip.initializeCollisionHitbox();
         launched = false;
 
-        messageTimer = 100;
+
         resetWhiteDot();
     }
 
 
     public void handleSpaceshipPostLaunch() {
+        if (messageTimer != 0)
+            return;
         Sprite ship = null;
         if (level == 1) {
             ship = spaceShip;
@@ -258,11 +269,11 @@ public class LabFiveGame extends Game {
         else if (level == 3) {
             ship = spaceShip3;
             spaceShip3.updatePositionWithGravity(whiteDwarf);
-            spaceShip3.updatePositionWithGravity(planetTwo);
-            spaceShip3.updatePositionWithGravity(planetThree);
+            spaceShip3.updatePositionWithGravity(planetFour);
+            spaceShip3.updatePositionWithGravity(planetFive);
 
 
-            if(spaceShip3.collidesWith(planetFour) || spaceShip3.collidesWith(planetFive) || spaceShip3.collidesWith(whiteDwarf) || spaceShip3.collidesWith(moon)) {
+            if (spaceShip3.collidesWith(planetFour) || spaceShip3.collidesWith(planetFive) || spaceShip3.collidesWith(whiteDwarf) || spaceShip3.collidesWith(moon)) {
                 collisionReset(spaceShip3);
             }
         }
@@ -354,7 +365,7 @@ public class LabFiveGame extends Game {
                 whiteTrajectoryDot.updatePositionWithGravity(asteroid);
             }
             else if (level == 3) {
-                System.out.println("correct level");
+                //System.out.println("correct level");
                 whiteTrajectoryDot.updatePositionWithGravity(planetFour);
                 whiteTrajectoryDot.updatePositionWithGravity(planetFive);
                 whiteTrajectoryDot.updatePositionWithGravity(whiteDwarf);
@@ -390,10 +401,18 @@ public class LabFiveGame extends Game {
 
         if (messageTimer > 0) {
             messageTimer -= 1;
+
             if (messageTimer == 0) {
                 currentMessage.setPosition(STAGERIGHT);
+
+                System.out.println("next level:" + level + 1);
                 if (currentMessage.getId() == "win")
                     level += 1;
+                else {
+                    currentShip.stopAnimation(0);
+                    collisionResetPosition(currentShip);
+                }
+
             }
             return;
         }
@@ -436,6 +455,8 @@ public class LabFiveGame extends Game {
         if (levelTwo != null && level == 2) levelTwo.draw(g);
 
         if (levelThree != null && level == 3) levelThree.draw(g);
+
+        if (level == 4) winMessage.draw(g);
 
 
     }

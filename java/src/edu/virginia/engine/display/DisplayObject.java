@@ -286,7 +286,7 @@ public class DisplayObject {
 		int y = (int)(currentYVelocity);
 		this.setPosition(new Point(current.x + x, current.y - y));
 		this.updateHitbox(x, -y);
-		System.out.println(this.id + ": " + this.hitbox.getBounds2D().toString());
+		//System.out.println(this.id + ": " + this.hitbox.getBounds2D().toString());
 	}
 
 	/* These methods are only ever called from the spaceships perspective
@@ -321,7 +321,7 @@ public class DisplayObject {
 
 	// return array containing the x and y gravity offsets
 	public double[] getGravityOffset(DisplayObject obstacle) {
-	    System.out.println("ids: " + this.id + " -- " + obstacle.getId());
+	   // System.out.println("ids: " + this.id + " -- " + obstacle.getId());
 		int obstacleMass = obstacle.getMass();
 		//System.out.println("masses " + obstacleMass + " -- " + this.mass);
 		Point obstaclePosition = obstacle.getCenter();
@@ -376,7 +376,7 @@ public class DisplayObject {
 	}
 
 	private Double getDistance(Point p1, Point p2) {
-	    System.out.println("which null" + p1 + " -- " + p2);
+	    //System.out.println("which null" + p1 + " -- " + p2);
 		Double value = Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
 		return Math.pow(value, 0.5);
 	}
